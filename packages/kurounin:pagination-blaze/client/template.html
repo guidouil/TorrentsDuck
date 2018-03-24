@@ -1,0 +1,45 @@
+<template name="defaultBootstrapPaginator">
+    <div class="ui basic segment {{containerClass}}" >
+        {{#if hasPages}}
+            <div class="ui buttons {{getPaginationClass}}">
+
+                <div class="ui button previous-page {{#if isInFirstPage}}disabled{{/if}} {{itemClass}}" >
+                    <i class="angle left icon"></i>
+                </div>
+
+                {{#if arePreviousPagesHidden}}
+                    {{#with 1}}
+                        <div class="ui button page-link {{itemClass}}" title="Go to page {{.}}">
+                            {{.}}
+                        </div>
+                    {{/with}}
+                    <div class="ui button show-prev {{itemClass}}" title="Show previous pages">
+                        ...
+                    </div>
+                {{/if}}
+
+                {{#each pagesToDisplay}}
+                    <div class="ui button page-link {{#if isActive}}active{{/if}} {{itemClass}}" title="Go to page {{.}}">
+                        {{.}}
+                    </div>
+                {{/each}}
+
+                {{#if areNextPagesHidden}}
+                    <div class="ui button show-next {{itemClass}}" title="Show next pages">
+                        ...
+                    </div>
+                    {{#with lastPage}}
+                        <div class="ui button page-link {{itemClass}}" title="Go to page {{.}}">
+                            {{.}}
+                        </div>
+                    {{/with}}
+                {{/if}}
+
+                <div class="ui button next-page {{#if isInLastPage}}disabled{{/if}} {{itemClass}}">
+                    <i class="angle right icon"></i>
+                </div>
+
+            </div>
+        {{/if}}
+    </div>
+</template>

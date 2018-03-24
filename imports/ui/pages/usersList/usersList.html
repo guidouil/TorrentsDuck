@@ -1,0 +1,73 @@
+<template name="usersList">
+  <div class="ui basic segment" id="tranfersList">
+    <table class="ui compact selectable unstackable table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Mail</th>
+          <th class="center aligned">Since</th>
+          <th class="center aligned">Status</th>
+          <th class="right aligned">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <td>{{username}}</td>
+          <td>
+            {{emails.[0].address}}
+          </td>
+          <td class="center aligned">
+            {{shortDate createdAt}}
+          </td>
+          <td class="center aligned">
+            {{#if isValid}}
+              <i class="green check icon"></i>
+            {{/if}}
+            {{#if isAdmin}}
+              <i class="user secret icon"></i>
+            {{/if}}
+          </td>
+          <td class="right aligned">
+            {{#unless isValid}}
+            <button class="ui primary compact icon button validateUser">
+              <i class="check icon"></i>
+            </button>
+            {{else}}
+            <button class="ui orange compact icon button inValidateUser">
+              <i class="remove icon"></i>
+            </button>
+            {{/unless}}
+            <button class="ui red compact icon button removeUser">
+              <i class="trash icon"></i>
+            </button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <!-- Remove user modal -->
+    <div class="ui basic modal" id="removeUserModal">
+      <div class="ui icon header">
+        <i class="red trash icon"></i>
+        Remove {{thisUsername}}
+      </div>
+      <div class="content center-this">
+        <p>Do you really want to remove <strong>{{thisUsername}}</strong> ?</p>
+      </div>
+      <div class="actions">
+        <div class="center-this">
+          <div class="ui red cancel inverted button">
+            <i class="remove icon"></i>
+            NO
+          </div>
+          <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            YES
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

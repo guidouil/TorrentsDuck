@@ -1,0 +1,8 @@
+<template name="home">
+  {{#unless currentUser}}
+    {{> hello}}
+  {{else}}
+    {{> sendTorrent}}
+    {{> tranfersList}}
+  {{/unless}}
+</template>

@@ -1,0 +1,9 @@
+<template name="logo">
+  {{#if url}}
+    <a href="{{url}}">
+      <img class="ui {{class}} image" src="{{src}}" alt="Torrents Duck" id="logo" />
+    </a>
+  {{else}}
+    <img class="ui {{class}} image" src="{{src}}" alt="Torrents Duck" id="logo" href="{{url}}" />
+  {{/if}}
+</template>

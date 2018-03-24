@@ -1,0 +1,26 @@
+<template name="sendTorrent">
+  <div class="ui basic segment">
+    <form class="ui form" id="sendTorrentForm">
+      <div class="two fields">
+        <div class="field">
+          <label>Send a .torrent file</label>
+          <div class="ui left icon input" id="torrentFileClick">
+            <input type="text" placeholder="Select a .torrent file" id="torrentFileInput">
+            <i class="file icon"></i>
+          </div>
+          <input type="file" id="torrentFile" class="hidden">
+        </div>
+        <div class="field">
+          <label>Past a magnet or torrent url</label>
+          <div class="ui right labeled left icon input" id="torrentUrlClick">
+            <i class="linkify icon"></i>
+            <input type="text" placeholder="Only magnet:// or http(s)://" id="torrentUrl">
+            <div class="ui label">
+              GO
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

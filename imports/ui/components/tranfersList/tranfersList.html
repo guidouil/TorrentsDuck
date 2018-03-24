@@ -1,0 +1,89 @@
+<template name="tranfersList">
+  <div class="ui basic segment" id="tranfersList">
+    <form class="ui form">
+      <div class="fields">
+        <div class="two wide field">
+          <select class="ui fluid dropdown" name="sort" id="sort">
+            <option value="progress">Progress</option>
+            <option value="name">Name</option>
+            <option value="downloadSpeed">Speed</option>
+            <option value="timeRemaining">Time</option>
+          </select>
+        </div>
+        <div class="ten wide field">
+          <div class="ui icon input">
+            <input type="text" placeholder="Search..." name="search" id="search">
+            <i class="search icon"></i>
+          </div>
+        </div>
+        <div class="two wide field">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" name="myTorrent" id="myTorrent">
+            <label>Mine</label>
+          </div>
+        </div>
+        <div class="two wide field">
+          <select class="ui fluid dropdown" name="perPage" id="perPage">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <table class="ui compact selectable unstackable table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="center aligned two wide">Progress</th>
+          <th class="center aligned"><i class="cloud download icon"></i></th>
+          <th class="center aligned"><i class="cloud upload icon"></i></th>
+          <th class="center aligned"><i class="clock icon"></i></th>
+          <th class="center aligned"><i class="users icon"></i></th>
+          <th class="center aligned"><i class="calendar icon"></i></th>
+          <th class="right aligned">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tranfers}}
+        <tr>
+          <td>{{name}}</td>
+          <td class="center aligned">
+            <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
+              <div class="bar">
+                <div class="progress"></div>
+              </div>
+            </div>
+            {{initProgress}}
+          </td>
+          <td class="center aligned">{{humanFileSize downloadSpeed false}}</td>
+          <td class="center aligned">{{humanFileSize uploadSpeed false}}</td>
+          <td class="center aligned">{{convertMs timeRemaining}}</td>
+          <td class="center aligned">{{numPeers}}</td>
+          <td class="center aligned">{{shortDate createdAt}}</td>
+          <td class="right aligned">
+            {{#if paused}}
+              <button class="ui primary compact icon button resumeTorrent">
+                <i class="play icon"></i>
+              </button>
+            {{else}}
+              <button class="ui yellow compact icon button pauseTorrent">
+                <i class="stop icon"></i>
+              </button>
+            {{/if}}
+            <button class="ui red compact icon button removeTorrent">
+              <i class="remove icon"></i>
+            </button>
+          </td>
+        </tr>
+        {{else}}
+          <td class="center aligned" colspan="8">
+            <strong>No torrents yet 😕</strong>
+          </td>
+        {{/each}}
+      </tbody>
+    </table>
+    {{> defaultBootstrapPaginator pagination=tranfersPagination limit=10 containerClass="center aligned"}}
+  </div>
+</template>
