@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { $ } from 'meteor/jquery';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 import Transfers from '../../../api/transfers/transfers.js';
 
@@ -14,6 +15,7 @@ Template.tranfersList.onCreated(() => {
       progress: -1,
     },
   });
+  instance.currentFiles = new ReactiveVar();
 });
 
 Template.tranfersList.onRendered(function() {
@@ -26,6 +28,9 @@ Template.tranfersList.helpers({
   },
   tranfers() {
     return Template.instance().transfersPagination.getPage();
+  },
+  currentFiles() {
+    return Template.instance().currentFiles.get();
   },
   initProgress() {
     const torrent = this;
@@ -107,16 +112,16 @@ Template.tranfersList.events({
       }
     });
   },
-  'change #perPage'(event, instance) {
-    instance.transfersPagination.perPage(Number(event.target.value));
+  'change #perPage'(event, templateInstance) {
+    templateInstance.transfersPagination.perPage(Number(event.target.value));
   },
-  'change #sort'(event, instance) {
+  'change #sort'(event, templateInstance) {
     const sort = {};
     sort[event.target.value] = -1;
-    instance.transfersPagination.sort(sort);
+    templateInstance.transfersPagination.sort(sort);
   },
-  'input #search'(event, instance) {
-    const filters = instance.transfersPagination.filters();
+  'input #search'(event, templateInstance) {
+    const filters = templateInstance.transfersPagination.filters();
     if (event.target.value) {
       filters['$or'] = [
         { name: { $regex: event.target.value, '$options': 'i' } },
@@ -125,15 +130,19 @@ Template.tranfersList.events({
     } else if (filters.$or) {
       delete filters.$or;
     }
-    instance.transfersPagination.filters(filters);
+    templateInstance.transfersPagination.filters(filters);
   },
-  'change #mine'(event, instance) {
-    const filters = instance.transfersPagination.filters();
+  'change #mine'(event, templateInstance) {
+    const filters = templateInstance.transfersPagination.filters();
     if (event.target.checked) {
       filters['userId'] = Meteor.userId();
     } else if (filters.userId) {
       delete filters.userId;
     }
-    instance.transfersPagination.filters(filters);
+    templateInstance.transfersPagination.filters(filters);
+  },
+  'click .transferName'(event, templateInstance) {
+    templateInstance.currentFiles.set(this.files);
+    $('.filesModal').modal('show');
   },
 });

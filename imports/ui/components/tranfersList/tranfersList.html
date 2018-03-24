@@ -1,37 +1,38 @@
 <template name="tranfersList">
-  <div class="ui basic segment" id="tranfersList">
-    <form class="ui form">
-      <div class="fields">
-        <div class="two wide field">
-          <select class="ui fluid dropdown" name="sort" id="sort">
-            <option value="progress">Progress</option>
-            <option value="name">Name</option>
-            <option value="downloadSpeed">Speed</option>
-            <option value="timeRemaining">Time</option>
-          </select>
-        </div>
-        <div class="ten wide field">
-          <div class="ui icon input">
-            <input type="text" placeholder="Search..." name="search" id="search">
-            <i class="search icon"></i>
-          </div>
-        </div>
-        <div class="two wide field">
-          <div class="ui toggle checkbox">
-            <input type="checkbox" name="myTorrent" id="myTorrent">
-            <label>Mine</label>
-          </div>
-        </div>
-        <div class="two wide field">
-          <select class="ui fluid dropdown" name="perPage" id="perPage">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
+
+  <form class="ui form">
+    <div class="fields">
+      <div class="ten wide field">
+        <div class="ui icon input">
+          <input type="text" placeholder="Search..." name="search" id="search">
+          <i class="search icon"></i>
         </div>
       </div>
-    </form>
+      <div class="two wide field">
+        <select class="ui fluid dropdown" name="sort" id="sort">
+          <option value="progress">Progress</option>
+          <option value="name">Name</option>
+          <option value="downloadSpeed">Speed</option>
+          <option value="timeRemaining">Time</option>
+        </select>
+      </div>
+      <div class="two wide field">
+        <select class="ui fluid dropdown" name="perPage" id="perPage">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="two wide field">
+        <div class="ui toggle checkbox middleCheckbox">
+          <input type="checkbox" name="myTorrent" id="myTorrent">
+          <label>Mine</label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div id="tranfersList">
     <table class="ui compact selectable unstackable table">
       <thead>
         <tr>
@@ -48,7 +49,7 @@
       <tbody>
         {{#each tranfers}}
         <tr>
-          <td>{{name}}</td>
+          <td><a href="#" class="transferName">{{name}}</a></td>
           <td class="center aligned">
             <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
               <div class="bar">
@@ -79,11 +80,32 @@
         </tr>
         {{else}}
           <td class="center aligned" colspan="8">
-            <strong>No torrents yet 😕</strong>
+            <strong>No transfers yet 😕</strong>
           </td>
         {{/each}}
       </tbody>
     </table>
     {{> defaultBootstrapPaginator pagination=tranfersPagination limit=10 containerClass="center aligned"}}
+  </div>
+
+  <div class="ui modal filesModal">
+    <i class="close icon"></i>
+    <div class="header">
+      Transfer file(s)
+    </div>
+    <div class="content">
+      <div class="description">
+        <div class="ui list">
+          {{#each file in currentFiles}}
+            <a class="item" href="/file/{{file}}" target="_blank">{{file}}</a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        Close
+      </div>
+    </div>
   </div>
 </template>

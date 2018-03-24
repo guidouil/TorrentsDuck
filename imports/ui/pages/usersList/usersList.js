@@ -42,7 +42,7 @@ Template.usersList.events({
     Meteor.call('setUserValidity', user._id, false, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success(`User "${user.username}" validated`);
+        sAlert.warning(`User "${user.username}" invalidated`);
       }
     });
   },

@@ -2,7 +2,10 @@
   {{#unless currentUser}}
     {{> hello}}
   {{else}}
-    {{> sendTorrent}}
-    {{> tranfersList}}
+    <div class="ui basic segment">
+      {{> sendTorrent}}
+      <div class="ui divider"></div>
+      {{> tranfersList}}
+    </div>
   {{/unless}}
 </template>

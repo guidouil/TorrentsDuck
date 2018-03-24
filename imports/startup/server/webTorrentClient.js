@@ -7,14 +7,20 @@ import Transfers from '../../api/transfers/transfers.js';
 Meteor.startup(() => {
   const webTorrentClient = new WebTorrent();
 
-  webTorrentClient.on('torrent', (torrent) => {
-    console.log('client', torrent.infoHash);
-  });
+  // webTorrentClient.on('torrent', (torrent) => {
+  //   console.log('client', torrent.infoHash);
+  // });
 
   Meteor.setInterval(() => {
     const { torrents } = webTorrentClient;
     if (torrents && torrents.length) {
       _.each(torrents, (torrent) => {
+        const files = [];
+        if (torrent.files && torrent.files.length > 0) {
+          _.each(torrent.files, (file) => {
+            files.push(file.path);
+          });
+        }
         Transfers.update(
           { _id: torrent.infoHash },
           {
@@ -29,6 +35,7 @@ Meteor.startup(() => {
               ratio: torrent.ratio,
               numPeers: torrent.numPeers,
               path: torrent.path,
+              files,
             }
           }
         );
