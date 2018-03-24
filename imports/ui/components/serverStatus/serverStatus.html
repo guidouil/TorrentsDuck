@@ -1,0 +1,24 @@
+<template name="serverStatus">
+  <div class="ui stackable grid">
+    <div class="five wide column">
+      <div class="ui labels">
+        <div class="ui basic right pointing label">
+          Load average
+        </div>
+        {{#each loadAverage}}
+        <div class="ui label">
+          {{roundTwo this}}
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="eleven wide column">
+      <div class="ui active yellow progress" id="diskUsage">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <div class="label">{{humanBitSize diskUsage.available}} available</div>
+      </div>
+    </div>
+  </div>
+</template>

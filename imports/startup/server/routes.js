@@ -4,7 +4,7 @@ import { JsonRoutes } from 'meteor/simple:json-routes';
 
 JsonRoutes.add('get', '/file/:name', function (req, res, next) {
   const filename = req.params.name;
-  if (filename) {
+  if (filename && fs.existsSync(`/data/torrents/${filename}`)) {
     // indicate a download and set the filename of the returned file
     res.writeHead(200, {
       'Content-Disposition': `attachment; filename=${filename}`,

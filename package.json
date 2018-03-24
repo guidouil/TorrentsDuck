@@ -10,6 +10,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
     "bcrypt": "^1.0.3",
+    "diskusage": "^0.2.4",
     "meteor-node-stubs": "^0.3.2",
     "webtorrent": "^0.98.24"
   },
