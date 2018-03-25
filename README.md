@@ -23,7 +23,7 @@ meteor npm install
 
 Once done, you can run your local copy with this command
 ```
-meteor
+meteor --settings settings.json
 ```
 
 First user registered get admin rights but only after a meteor server restart.

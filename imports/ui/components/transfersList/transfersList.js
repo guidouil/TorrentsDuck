@@ -43,7 +43,7 @@ Template.transfersList.helpers({
   },
   humanFileSize(bytes, si) {
     if (!bytes) {
-      return '';
+      return false;
     }
     const thresh = si ? 1000 : 1024;
     if (Math.abs(bytes) < thresh) {
@@ -60,8 +60,8 @@ Template.transfersList.helpers({
     return `${bytes.toFixed(1)} ${units[u]}/s`;
   },
   convertMs(ms) {
-    if (!ms) {
-      return '';
+    if (!ms || ms === Infinity) {
+      return ms;
     }
     let h;
     let m;

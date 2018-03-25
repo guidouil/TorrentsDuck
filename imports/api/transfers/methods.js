@@ -21,7 +21,7 @@ Meteor.methods({
     const upsertTransfer = Meteor.bindEnvironment((_id, transfer) => {
       Transfers.upsert({ _id }, { $set: transfer });
     });
-    const path = '/data/torrents/';
+    const path = Meteor.settings.torrentsPath;
     webTorrentClient.add(torrentRef, { path }, (torrent) => {
       if (torrent.ready) {
         const transfer = {

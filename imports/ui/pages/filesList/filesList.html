@@ -1,9 +1,37 @@
 <template name="filesList">
   <div class="ui basic segment">
+    <form class="ui form">
+      <div class="fields">
+        <div class="twelve wide field">
+          <div class="ui icon input">
+            <input type="text" placeholder="Search..." name="search" id="search">
+            <i class="search icon"></i>
+          </div>
+        </div>
+        <div class="two wide field">
+          <select class="ui fluid dropdown" name="sort" id="sort">
+            <option value="createdAt">Date</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+        <div class="two wide field">
+          <select class="ui fluid dropdown" name="perPage" id="perPage">
+            <option value="100">100</option>
+            <option value="50">50</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+    </form>
     <div class="ui celled list">
       {{#each filesList}}
       <div class="item">
-        <i class="folder icon"></i>
+        <div class="right floated content">
+          <div class="ui red icon button deleteFiles">
+            <i class="trash icon"></i>
+          </div>
+        </div>
+        <i class="yellow folder open icon"></i>
         <div class="content">
           <div class="header">{{name}}</div>
           <div class="description">{{shortDate createdAt}}</div>
@@ -12,15 +40,46 @@
             <a class="item" href="/file/{{this}}" target="_blank">
               <i class="file icon"></i>
               <div class="content">
-                <div class="description">{{this}}</div>
+                <a>{{this}}</a>
               </div>
             </a>
             {{/each}}
           </div>
         </div>
       </div>
+      {{else}}
+      <div class="item">
+        <i class="frown icon"></i>
+        <div class="content">
+          <div class="header">No files found</div>
+        </div>
+      </div>
       {{/each}}
     </div>
     {{> defaultBootstrapPaginator pagination=filesPagination limit=50 containerClass="center aligned"}}
+  </div>
+
+  <!-- Remove file modal -->
+  <div class="ui basic modal" id="removeFileModal">
+    <div class="ui icon header">
+      <i class="red trash icon"></i>
+      Remove file
+    </div>
+    <div class="content center-this">
+      <p>Do you want to permanently delete
+        "<strong>{{currentFileName}}</strong>" ?</p>
+    </div>
+    <div class="actions">
+      <div class="center-this">
+        <div class="ui red cancel inverted button">
+          <i class="remove icon"></i>
+          NO
+        </div>
+        <div class="ui green ok inverted button">
+          <i class="checkmark icon"></i>
+          YES
+        </div>
+      </div>
+    </div>
   </div>
 </template>

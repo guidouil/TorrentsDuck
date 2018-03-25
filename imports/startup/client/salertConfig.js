@@ -4,10 +4,10 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 Meteor.startup(() => {
   sAlert.config({
     effect: 'stackslide',
-    position: 'bottom-right',
+    position: 'top-right',
     timeout: 3000,
     html: false,
-    onRouteClose: true,
+    onRouteClose: false,
     stack: true,
     // beep: '/quack.mp3',
   });
