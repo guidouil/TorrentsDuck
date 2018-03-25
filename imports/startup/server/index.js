@@ -3,4 +3,5 @@
 import './routes.js';
 import './register-api.js';
 import './webTorrentClient.js';
+import './ftpServer.js';
 import './firstAdmin.js';
