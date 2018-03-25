@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 import Transfers from './transfers.js';
+import Files from '../files/files.js';
 import webTorrentClient from '../../startup/server/webTorrentClient.js';
 
 Meteor.methods({
@@ -76,6 +77,12 @@ Meteor.methods({
     }
     const torrent = webTorrentClient.get(torrentId);
     if (torrent) {
+      // save references to Files collection
+      const transfer = Transfers.findOne({ _id: torrentId });
+      if (transfer && transfer.progress === 1) {
+        const { name, files, createdAt } = transfer;
+        Files.insert({ name, files, createdAt });
+      }
       webTorrentClient.remove(torrentId);
     }
     return Transfers.remove({ _id: torrentId });

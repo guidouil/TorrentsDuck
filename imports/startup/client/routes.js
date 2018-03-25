@@ -5,15 +5,24 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/filesList/filesList.js';
 import '../../ui/pages/usersList/usersList.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/components/customAtForm/customAtForm.js';
 
 // Set up all routes in the app
 FlowRouter.route('/', {
-  name: 'App.home',
+  name: 'home',
   action() {
     BlazeLayout.render('appBody', { main: 'home' });
+  },
+});
+
+FlowRouter.route('/files-list', {
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  name: 'filesList',
+  action() {
+    BlazeLayout.render('appBody', { main: 'filesList' });
   },
 });
 

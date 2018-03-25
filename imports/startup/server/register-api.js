@@ -1,5 +1,6 @@
 // Register your apis here
 import '../../api/users/server/publications.js';
+import '../../api/files/server/publications.js';
 
 import '../../api/users/methods.js';
 import '../../api/system/methods.js';

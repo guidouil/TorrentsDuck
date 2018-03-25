@@ -6,9 +6,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import Transfers from '../../../api/transfers/transfers.js';
 
-import './tranfersList.html';
+import './transfersList.html';
 
-Template.tranfersList.onCreated(() => {
+Template.transfersList.onCreated(() => {
   const instance = Template.instance();
   instance.transfersPagination = new Meteor.Pagination(Transfers, {
     sort: {
@@ -18,11 +18,11 @@ Template.tranfersList.onCreated(() => {
   instance.currentFiles = new ReactiveVar();
 });
 
-Template.tranfersList.onRendered(function() {
+Template.transfersList.onRendered(function() {
   $('.dropdown').dropdown();
 });
 
-Template.tranfersList.helpers({
+Template.transfersList.helpers({
   transfersPagination() {
     return Template.instance().transfersPagination;
   },
@@ -59,13 +59,6 @@ Template.tranfersList.helpers({
     } while (Math.abs(bytes) >= thresh && u < units.length - 1);
     return `${bytes.toFixed(1)} ${units[u]}/s`;
   },
-  shortDate(d) {
-    if (!d) {
-      return '';
-    }
-    const pad = (s) => (s < 10) ? `0${s}` : s;
-    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
-  },
   convertMs(ms) {
     if (!ms) {
       return '';
@@ -84,7 +77,7 @@ Template.tranfersList.helpers({
   },
 });
 
-Template.tranfersList.events({
+Template.transfersList.events({
   'click .pauseTorrent'() {
     const torrent = this;
     Meteor.call('pauseTransfer', torrent._id, (error, success) => {

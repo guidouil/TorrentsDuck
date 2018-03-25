@@ -1,11 +1,19 @@
 <template name="home">
-  {{#unless currentUser}}
+  {{#unless isValidOrIsAdmin}}
+    {{#if currentUser}}
+      <div class="ui warning message">
+        <div class="header">
+          You not validated yet!
+        </div>
+        An administrator is going to validate your account ASAP. You don't need to refresh the page.
+      </div>
+    {{/if}}
     {{> hello}}
   {{else}}
     <div class="ui basic segment">
       {{> sendTorrent}}
       <div class="ui divider"></div>
-      {{> tranfersList}}
+      {{> transfersList}}
       <div class="ui divider"></div>
       {{> serverStatus}}
     </div>
