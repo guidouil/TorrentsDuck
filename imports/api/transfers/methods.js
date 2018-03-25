@@ -80,8 +80,8 @@ Meteor.methods({
       // save references to Files collection
       const transfer = Transfers.findOne({ _id: torrentId });
       if (transfer && transfer.progress === 1) {
-        const { name, files, createdAt } = transfer;
-        Files.insert({ name, files, createdAt });
+        const { name, files, size, createdAt } = transfer;
+        Files.insert({ name, files, size, createdAt });
       }
       webTorrentClient.remove(torrentId);
     }

@@ -8,7 +8,7 @@
           <i class="search icon"></i>
         </div>
       </div>
-      <div class="two wide field">
+      <div class="two wide field desktop-only">
         <select class="ui fluid dropdown" name="sort" id="sort">
           <option value="progress">Progress</option>
           <option value="name">Name</option>
@@ -16,7 +16,7 @@
           <option value="timeRemaining">Time</option>
         </select>
       </div>
-      <div class="two wide field">
+      <div class="two wide field desktop-only">
         <select class="ui fluid dropdown" name="perPage" id="perPage">
           <option value="10">10</option>
           <option value="20">20</option>
@@ -37,6 +37,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th class="center aligned">Size</th>
           <th class="center aligned two wide">Progress</th>
           <th class="center aligned"><i class="cloud download icon"></i></th>
           <th class="center aligned"><i class="cloud upload icon"></i></th>
@@ -50,6 +51,7 @@
         {{#each tranfers}}
         <tr>
           <td><a href="#" class="transferName">{{name}}</a></td>
+          <td class="right aligned">{{humanFileSize size true}}</td>
           <td class="center aligned">
             <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
               <div class="bar">
@@ -58,8 +60,8 @@
             </div>
             {{initProgress}}
           </td>
-          <td class="center aligned">{{humanFileSize downloadSpeed false}}</td>
-          <td class="center aligned">{{humanFileSize uploadSpeed false}}</td>
+          <td class="center aligned">{{humanFileSize downloadSpeed false}}/s</td>
+          <td class="center aligned">{{humanFileSize uploadSpeed false}}/s</td>
           <td class="center aligned">{{convertMs timeRemaining}}</td>
           <td class="center aligned">{{numPeers}}</td>
           <td class="center aligned">{{shortDate createdAt}}</td>

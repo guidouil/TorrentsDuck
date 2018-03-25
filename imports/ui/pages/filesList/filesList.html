@@ -8,13 +8,13 @@
             <i class="search icon"></i>
           </div>
         </div>
-        <div class="two wide field">
+        <div class="two wide field desktop-only">
           <select class="ui fluid dropdown" name="sort" id="sort">
             <option value="createdAt">Date</option>
             <option value="name">Name</option>
           </select>
         </div>
-        <div class="two wide field">
+        <div class="two wide field desktop-only">
           <select class="ui fluid dropdown" name="perPage" id="perPage">
             <option value="100">100</option>
             <option value="50">50</option>
@@ -34,6 +34,7 @@
         <i class="yellow folder open icon"></i>
         <div class="content">
           <div class="header">{{name}}</div>
+          <div class="meta">{{humanFileSize size yes}}</div>
           <div class="description">{{shortDate createdAt}}</div>
           <div class="list">
             {{#each files}}

@@ -16,3 +16,19 @@
 .middleCheckbox {
   margin-top: 7px;
 }
+//medium+ screen sizes
+@media (min-width:992px) {
+  .desktop-only {
+    display:block !important;
+  }
+}
+//small screen sizes
+@media (max-width: 991px) {
+  .mobile-only {
+    display:block !important;
+  }
+ 
+  .desktop-only {
+    display:none !important;
+  }
+}

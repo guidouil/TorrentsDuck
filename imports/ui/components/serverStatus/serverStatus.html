@@ -17,8 +17,9 @@
         <div class="bar">
           <div class="progress"></div>
         </div>
-        <div class="label">{{humanBitSize diskUsage.available}} available</div>
+        <div class="label">{{humanFileSize diskUsage.available true}} available</div>
       </div>
     </div>
   </div>
+  <h4 class="ui center aligned header">FTP is running on port <div class="ui large green label">{{ftpPort}}</div><br>We recommend <a href="https://cyberduck.io/" target="_blanck">Cyberduck</a></h4>
 </template>
