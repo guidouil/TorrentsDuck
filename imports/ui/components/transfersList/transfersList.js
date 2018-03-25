@@ -57,6 +57,12 @@ Template.transfersList.helpers({
     h %= 24;
     return `${d}d ${h}h ${m}m ${s}s`;
   },
+  truncate(name) {
+    if (name && name.length > 50) {
+      return `${name.substring(0, 50)}...`;
+    }
+    return name;
+  },
 });
 
 Template.transfersList.events({

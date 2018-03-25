@@ -50,7 +50,7 @@
       <tbody>
         {{#each tranfers}}
         <tr>
-          <td><a href="#" class="transferName">{{name}}</a></td>
+          <td><a href="#" class="transferName">{{truncate name}}</a></td>
           <td class="right aligned">{{humanFileSize size true}}</td>
           <td class="center aligned">
             <div class="ui indicating progress torrentProgress" id="progress{{_id}}">

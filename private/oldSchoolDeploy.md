@@ -10,11 +10,11 @@ git clone https://github.com/guidouil/TorrentsDuck.git  torrentsduck-source
 cd torrentsduck-source
 meteor npm install
 meteor build ../builds/. --server-only
-tar xzf torrentsduck-source.tar.gz
 cd
 forever stop torrentsduck
 rm -rf torrentsduck
 cd builds
+tar xzf torrentsduck-source.tar.gz
 mv bundle ../torrentsduck
 cd ../torrentsduck/programs/server/
 npm install
