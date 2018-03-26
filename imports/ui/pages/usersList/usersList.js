@@ -13,7 +13,7 @@ Template.usersList.onCreated(() => {
 
 Template.usersList.helpers({
   users() {
-    return Meteor.users.find();
+    return Meteor.users.find({}, { sort: { createdAt: -1 } });
   },
   thisUsername() {
     return Template.instance().thisUsername.get();

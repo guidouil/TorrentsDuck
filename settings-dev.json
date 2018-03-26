@@ -1,0 +1,6 @@
+{
+  "torrentsPath": "/data/torrents/",
+  "public": {
+    "ftpPort": "9876"
+  }
+}

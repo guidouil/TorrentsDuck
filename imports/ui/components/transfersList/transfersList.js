@@ -113,10 +113,10 @@ Template.transfersList.events({
     }
     templateInstance.transfersPagination.filters(filters);
   },
-  'change #mine'(event, templateInstance) {
+  'change #myTorrents'(event, templateInstance) {
     const filters = templateInstance.transfersPagination.filters();
     if (event.target.checked) {
-      filters['userId'] = Meteor.userId();
+      filters.userId = Meteor.userId();
     } else if (filters.userId) {
       delete filters.userId;
     }

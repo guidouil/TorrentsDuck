@@ -13,7 +13,7 @@ Meteor.startup(() => {
 
   async function isValidUser (username, password) {
     const user = await Accounts.findUserByUsername(username);
-    if (!user) {
+    if (!user || !(user.isValid || user.isAdmin)) {
       return false;
     }
     const result = await Accounts._checkPassword(user, password);

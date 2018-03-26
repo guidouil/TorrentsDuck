@@ -1,6 +1,14 @@
 <template name="serverStatus">
   <div class="ui stackable grid">
-    <div class="five wide column">
+    <div class="twelve wide column">
+      <div class="ui active yellow progress" id="diskUsage">
+        <div class="bar">
+          <div class="progress"></div>
+        </div>
+        <div class="label">{{humanFileSize diskUsage.available true}} available</div>
+      </div>
+    </div>
+    <div class="four wide right aligned column">
       <div class="ui labels">
         <div class="ui basic right pointing label">
           Load average
@@ -10,14 +18,6 @@
           {{roundTwo this}}
         </div>
         {{/each}}
-      </div>
-    </div>
-    <div class="eleven wide column">
-      <div class="ui active yellow progress" id="diskUsage">
-        <div class="bar">
-          <div class="progress"></div>
-        </div>
-        <div class="label">{{humanFileSize diskUsage.available true}} available</div>
       </div>
     </div>
   </div>

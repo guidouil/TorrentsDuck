@@ -26,7 +26,7 @@
       </div>
       <div class="two wide field">
         <div class="ui toggle checkbox middleCheckbox">
-          <input type="checkbox" name="myTorrent" id="myTorrent">
+          <input type="checkbox" name="myTorrent" id="myTorrents">
           <label>Mine</label>
         </div>
       </div>
@@ -39,11 +39,12 @@
           <th>Name</th>
           <th class="center aligned">Size</th>
           <th class="center aligned two wide">Progress</th>
-          <th class="center aligned"><i class="cloud download icon"></i></th>
-          <th class="center aligned"><i class="cloud upload icon"></i></th>
-          <th class="center aligned"><i class="clock icon"></i></th>
-          <th class="center aligned"><i class="users icon"></i></th>
-          <th class="center aligned"><i class="calendar icon"></i></th>
+          <th class="center aligned"><i class="cloud download icon" title="Download"></i></th>
+          <th class="center aligned"><i class="cloud upload icon" title="Upload"></i></th>
+          <th class="center aligned"><i class="chart line icon" title="Ratio"></i></th>
+          <th class="center aligned"><i class="clock icon" title="Remaining time"></i></th>
+          <th class="center aligned"><i class="users icon" title="Peers"></i></th>
+          <th class="center aligned"><i class="calendar icon" title="Start date"></i></th>
           <th class="right aligned">Actions</th>
         </tr>
       </thead>
@@ -62,6 +63,7 @@
           </td>
           <td class="center aligned">{{humanFileSize downloadSpeed false}}/s</td>
           <td class="center aligned">{{humanFileSize uploadSpeed false}}/s</td>
+          <td class="center aligned">{{roundTwo ratio}}/s</td>
           <td class="center aligned">{{convertMs timeRemaining}}</td>
           <td class="center aligned">{{numPeers}}</td>
           <td class="center aligned">{{shortDate createdAt}}</td>
@@ -81,7 +83,7 @@
           </td>
         </tr>
         {{else}}
-          <td class="center aligned" colspan="8">
+          <td class="center aligned" colspan="10">
             <strong>No transfers yet 😕</strong>
           </td>
         {{/each}}

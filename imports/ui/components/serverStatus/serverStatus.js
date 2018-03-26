@@ -41,12 +41,6 @@ Template.serverStatus.helpers({
   diskUsage() {
     return Template.instance().diskUsage.get();
   },
-  roundTwo(num) {
-    if (!num) {
-      return '';
-    }
-    return Math.round(num * 100) / 100;
-  },
   ftpPort() {
     return Meteor.settings.public.ftpPort;
   },
