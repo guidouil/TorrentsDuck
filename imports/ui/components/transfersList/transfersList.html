@@ -32,8 +32,9 @@
       </div>
     </div>
   </form>
+
   <div id="tranfersList">
-    <table class="ui compact selectable unstackable table">
+    <table class="ui inverted single line selectable unstackable table">
       <thead>
         <tr>
           <th>Name</th>
@@ -68,23 +69,26 @@
           <td class="center aligned">{{numPeers}}</td>
           <td class="center aligned">{{shortDate createdAt}}</td>
           <td class="right aligned">
+            <button class="ui green compact icon button restartTorrent" data-tooltip="Restart torrent" data-inverted="" data-position="top right">
+              <i class="sync icon"></i>
+            </button>
             {{#if paused}}
-              <button class="ui primary compact icon button resumeTorrent">
+              <button class="ui primary compact icon button resumeTorrent" data-tooltip="Resume peers search" data-inverted="" data-position="top right">
                 <i class="play icon"></i>
               </button>
             {{else}}
-              <button class="ui yellow compact icon button pauseTorrent">
-                <i class="stop icon"></i>
+              <button class="ui yellow compact icon button pauseTorrent" data-tooltip="Pause peers search" data-inverted="" data-position="top right">
+                <i class="pause icon"></i>
               </button>
             {{/if}}
-            <button class="ui red compact icon button removeTorrent">
+            <button class="ui red compact icon button removeTorrent" data-tooltip="Delete torrent" data-inverted="" data-position="top right">
               <i class="remove icon"></i>
             </button>
           </td>
         </tr>
         {{else}}
           <td class="center aligned" colspan="10">
-            <strong>No transfers yet 😕</strong>
+            <strong>No transfers found 😕</strong>
           </td>
         {{/each}}
       </tbody>

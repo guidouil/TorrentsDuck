@@ -71,7 +71,7 @@ Template.transfersList.events({
     Meteor.call('pauseTransfer', torrent._id, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success(`Torrent "${torrent.name}" paused`);
+        sAlert.success(`Torrent "${torrent.name}" peers search paused`);
       }
     });
   },
@@ -80,7 +80,7 @@ Template.transfersList.events({
     Meteor.call('resumeTransfer', torrent._id, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success(`Torrent "${torrent.name}" restarted`);
+        sAlert.success(`Torrent "${torrent.name}" peers search restarted`);
       }
     });
   },
@@ -90,6 +90,15 @@ Template.transfersList.events({
       if (error) sAlert.error(error);
       if (success) {
         sAlert.success(`Torrent "${torrent.name}" removed`);
+      }
+    });
+  },
+  'click .restartTorrent'() {
+    const torrent = this;
+    Meteor.call('startTransfer', torrent.torrentRef, (error, success) => {
+      if (error) sAlert.error(error);
+      if (success) {
+        sAlert.success(`Torrent "${torrent.name}" restarted`);
       }
     });
   },

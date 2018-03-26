@@ -1,5 +1,6 @@
 {
   "torrentsPath": "/home/gui/torrents/",
+  "uploadsPath": "/home/gui/uploads/",
   "public": {
     "ftpPort": "9876"
   }

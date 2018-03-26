@@ -18,7 +18,7 @@ Template.registerHelper('shortDate', (d) => {
 });
 
 Template.registerHelper('humanFileSize', (bytes, si) => {
-  if (!bytes) {
+  if (bytes !== 0 && !bytes) {
     return false;
   }
   const thresh = si ? 1000 : 1024;
@@ -37,10 +37,7 @@ Template.registerHelper('humanFileSize', (bytes, si) => {
 });
 
 Template.registerHelper('roundTwo', (num) => {
-  if (num === 0) {
-    return num;
-  }
-  if (!num) {
+  if (num !== 0 && !num) {
     return '';
   }
   return Math.round(num * 100) / 100;

@@ -1,6 +1,8 @@
 // Methods related to Transfers
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { _ } from 'meteor/underscore';
+import fs from 'fs';
 
 import Transfers from './transfers.js';
 import Files from '../files/files.js';
@@ -27,6 +29,7 @@ Meteor.methods({
         const transfer = {
           name: torrent.name,
           createdAt: new Date(),
+          torrentRef,
           userId,
         };
         upsertTransfer(torrent.infoHash, transfer);
@@ -80,8 +83,15 @@ Meteor.methods({
       // save references to Files collection
       const transfer = Transfers.findOne({ _id: torrentId });
       if (transfer && transfer.progress === 1) {
-        const { name, files, size, createdAt } = transfer;
-        Files.insert({ name, files, size, createdAt });
+        // archive torrent info
+        const { name, files, size, torrentRef, createdAt } = transfer;
+        Files.upsert({ _id: torrentId }, { name, files, size, torrentRef, createdAt });
+      } else if (transfer.files) {
+        // Delete files
+        _.each(transfer.files, (file) => {
+          const filePath = Meteor.settings.torrentsPath + file;
+          fs.unlink(filePath);
+        });
       }
       webTorrentClient.remove(torrentId);
     }

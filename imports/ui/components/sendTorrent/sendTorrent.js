@@ -41,7 +41,7 @@ Template.sendTorrent.events({
   'change #torrentUrl'(event) {
     const torrentUrl = event.currentTarget.value;
     if (torrentUrl) {
-      if (!torrentUrl.startsWith('magnet:') && !torrentUrl.startsWith('http:') && !torrentUrl.startsWith('https:')) {
+      if (!torrentUrl.startsWith('magnet:') && !torrentUrl.startsWith('http://') && !torrentUrl.startsWith('https://')) {
         sAlert.error('URL must start with http:, https: or magnet: 😱');
         return false;
       }

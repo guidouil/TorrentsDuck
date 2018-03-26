@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { $ } from 'meteor/jquery';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 import Files from '../../../api/files/files';
 
@@ -39,6 +40,15 @@ Template.filesList.events({
         return true;
       },
     }).modal('show');
+  },
+  'click .reSeedTorrent'() {
+    const file = this;
+    Meteor.call('startTransfer', file.torrentRef, (error, success) => {
+      if (error) sAlert.error(error);
+      if (success) {
+        sAlert.success(`Torrent "${file.name}" restarted`);
+      }
+    });
   },
   'change #perPage'(event, templateInstance) {
     templateInstance.filesPagination.perPage(Number(event.target.value));
