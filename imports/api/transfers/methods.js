@@ -20,19 +20,23 @@ Meteor.methods({
     }
     const userId = Meteor.userId();
 
-    const upsertTransfer = Meteor.bindEnvironment((_id, transfer) => {
-      Transfers.upsert({ _id }, { $set: transfer });
-    });
+    async function upsertTransfer (_id, transfer) {
+      return Transfers.upsert({ _id }, { $set: transfer });
+    }
+
     const path = Meteor.settings.torrentsPath;
     webTorrentClient.add(torrentRef, { path }, (torrent) => {
       if (torrent.ready) {
         const transfer = {
           name: torrent.name,
+          downloadSpeed: 0,
+          uploadSpeed: 0,
+          timeRemaining: '',
           createdAt: new Date(),
           torrentRef,
           userId,
         };
-        upsertTransfer(torrent.infoHash, transfer);
+        upsertTransfer(torrent.infoHash, transfer).then(result => result);
       }
     });
     return true;
@@ -90,7 +94,7 @@ Meteor.methods({
         // Delete files
         _.each(transfer.files, (file) => {
           const filePath = Meteor.settings.torrentsPath + file;
-          fs.unlink(filePath);
+          fs.unlinkSync(filePath);
         });
       }
       webTorrentClient.remove(torrentId);
