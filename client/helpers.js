@@ -37,6 +37,9 @@ Template.registerHelper('humanFileSize', (bytes, si) => {
 });
 
 Template.registerHelper('roundTwo', (num) => {
+  if (num === 0) {
+    return num;
+  }
   if (!num) {
     return '';
   }
