@@ -43,12 +43,21 @@ Template.filesList.events({
   },
   'click .reSeedTorrent'() {
     const file = this;
-    Meteor.call('startTransfer', file.torrentRef, (error, success) => {
-      if (error) sAlert.error(error);
-      if (success) {
-        sAlert.success(`Torrent "${file.name}" restarted`);
+    Meteor.call('getTorrent', file._id, (getError, getSuccess) => {
+      if (getError) sAlert.error(getError);
+      if (getSuccess) {
+        sAlert.warning('Torrent already in queue 😕');
+        return false;
       }
+      Meteor.call('startTransfer', file.torrentRef, (error, success) => {
+        if (error) sAlert.error(error);
+        if (success) {
+          sAlert.success(`Torrent "${file.name}" restarted`);
+        }
+      });
+      return true;
     });
+    return false;
   },
   'change #perPage'(event, templateInstance) {
     templateInstance.filesPagination.perPage(Number(event.target.value));

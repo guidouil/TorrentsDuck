@@ -8,24 +8,41 @@ import Transfers from './transfers.js';
 import Files from '../files/files.js';
 import webTorrentClient from '../../startup/server/webTorrentClient.js';
 
+const validateUser = (user) => {
+  if (!user) {
+    throw new Meteor.Error(401, 'You must be signed in.');
+  }
+  if (!(user.isValid || user.isAdmin)) {
+    throw new Meteor.Error(403, 'You are not authorized.');
+  }
+  return true;
+};
+
 Meteor.methods({
+  'getTorrent'(torrentId) {
+    check(torrentId, String);
+    const user = Meteor.user();
+    if (!validateUser(user)) return false;
+
+    const torrent = webTorrentClient.get(torrentId);
+    if (torrent) {
+      return true;
+    }
+    return false;
+  },
   'startTransfer'(torrentRef) {
     check(torrentRef, String);
     const user = Meteor.user();
-    if (!user) {
-      throw new Meteor.Error(401, 'You must be signed in.');
-    }
-    if (!(user.isValid || user.isAdmin)) {
-      throw new Meteor.Error(403, 'You are not validated yet.');
-    }
-    const userId = Meteor.userId();
+    if (!validateUser(user)) return false;
 
     async function upsertTransfer (_id, transfer) {
-      return Transfers.upsert({ _id }, { $set: transfer });
+      await Transfers.upsert({ _id }, { $set: transfer });
     }
 
     const path = Meteor.settings.torrentsPath;
+    const userId = user._id;
     webTorrentClient.add(torrentRef, { path }, (torrent) => {
+
       if (torrent.ready) {
         const transfer = {
           name: torrent.name,
@@ -36,7 +53,7 @@ Meteor.methods({
           torrentRef,
           userId,
         };
-        upsertTransfer(torrent.infoHash, transfer).then(result => result);
+        upsertTransfer(torrent.infoHash, transfer);
       }
     });
     return true;
@@ -44,12 +61,8 @@ Meteor.methods({
   'pauseTransfer'(torrentId) {
     check(torrentId, String);
     const user = Meteor.user();
-    if (!user) {
-      throw new Meteor.Error(401, 'You must be signed in.');
-    }
-    if (!(user.isValid || user.isAdmin)) {
-      throw new Meteor.Error(403, 'You are not validated yet.');
-    }
+    if (!validateUser(user)) return false;
+
     const torrent = webTorrentClient.get(torrentId);
     if (!torrent) {
       throw new Meteor.Error(404, 'Torrent not found.');
@@ -60,12 +73,8 @@ Meteor.methods({
   'resumeTransfer'(torrentId) {
     check(torrentId, String);
     const user = Meteor.user();
-    if (!user) {
-      throw new Meteor.Error(401, 'You must be signed in.');
-    }
-    if (!(user.isValid || user.isAdmin)) {
-      throw new Meteor.Error(403, 'You are not validated yet.');
-    }
+    if (!validateUser(user)) return false;
+
     const torrent = webTorrentClient.get(torrentId);
     if (!torrent) {
       throw new Meteor.Error(404, 'Torrent not found.');
@@ -76,12 +85,8 @@ Meteor.methods({
   'removeTransfer'(torrentId) {
     check(torrentId, String);
     const user = Meteor.user();
-    if (!user) {
-      throw new Meteor.Error(401, 'You must be signed in.');
-    }
-    if (!(user.isValid || user.isAdmin)) {
-      throw new Meteor.Error(403, 'You are not validated yet.');
-    }
+    if (!validateUser(user)) return false;
+
     const torrent = webTorrentClient.get(torrentId);
     if (torrent) {
       // save references to Files collection

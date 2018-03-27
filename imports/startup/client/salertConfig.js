@@ -9,6 +9,9 @@ Meteor.startup(() => {
     html: false,
     onRouteClose: false,
     stack: true,
-    // beep: '/quack.mp3',
+    beep: {
+      error: '/quack.mp3',
+      warning: '/quack.mp3',
+    },
   });
 });

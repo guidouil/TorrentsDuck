@@ -71,7 +71,7 @@ Template.transfersList.events({
     Meteor.call('pauseTransfer', torrent._id, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success(`Torrent "${torrent.name}" peers search paused`);
+        sAlert.info(`Torrent "${torrent.name}" peers search paused`);
       }
     });
   },
@@ -95,12 +95,21 @@ Template.transfersList.events({
   },
   'click .restartTorrent'() {
     const torrent = this;
-    Meteor.call('startTransfer', torrent.torrentRef, (error, success) => {
-      if (error) sAlert.error(error);
-      if (success) {
-        sAlert.success(`Torrent "${torrent.name}" restarted`);
+    Meteor.call('getTorrent', torrent._id, (getError, getSuccess) => {
+      if (getError) sAlert.error(getError);
+      if (getSuccess) {
+        sAlert.warning('Torrent already in queue 😕');
+        return false;
       }
+      Meteor.call('startTransfer', torrent.torrentRef, (error, success) => {
+        if (error) sAlert.error(error);
+        if (success) {
+          sAlert.success(`Torrent "${torrent.name}" restarted`);
+        }
+      });
+      return true;
     });
+    return false;
   },
   'change #perPage'(event, templateInstance) {
     templateInstance.transfersPagination.perPage(Number(event.target.value));

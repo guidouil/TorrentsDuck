@@ -1,6 +1,8 @@
 {
   "torrentsPath": "/data/torrents/",
   "uploadsPath": "/data/uploads/",
+  "serverIp": "62.210.205.45",
+  "ftpPasvRange": "8000-9000",
   "public": {
     "ftpPort": "9876"
   }
