@@ -34,7 +34,7 @@ First user registered get admin rights but only after a meteor server restart.
 
 ## Deployment
 
-Will be using [Meteor Up](http://meteor-up.com/) as soon as out of alpha versions
+[Follow the Meteor Up deployement guide](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy.md)
 
 ## Built With
 
