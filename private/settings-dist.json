@@ -1,7 +1,7 @@
 {
   "torrentsPath": "/home/gui/torrents/",
   "uploadsPath": "/home/gui/uploads/",
-  "serverIp": "0.0.0.0",
+  "serverIp": "MY.SERVER.IP.ADDRESS",
   "ftpPasvRange": "8000-9000",
   "public": {
     "ftpPort": "9876"
