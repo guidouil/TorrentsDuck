@@ -1,6 +1,6 @@
 {
-  "torrentsPath": "/home/gui/torrents/",
-  "uploadsPath": "/home/gui/uploads/",
+  "torrentsPath": "/data/torrents/",
+  "uploadsPath": "/data/uploads/",
   "serverIp": "0.0.0.0",
   "ftpPasvRange": "8000-9000",
   "public": {
