@@ -39,7 +39,7 @@ Meteor.methods({
     check(path, String);
     const user = Meteor.user();
     if (!validateUser(user)) return false;
-    if (path.startsWith('.')) {
+    if (path.startsWith('.') || path.includes('/.')) {
       throw new Meteor.Error(420, 'Hack detected.');
     }
 

@@ -26,7 +26,7 @@
           </a>
         {{/if}}
         {{#if isFile}}
-          <a class="item" href="/file/{{name}}" target="_blank">
+          <a class="item" href="{{noSlash currentPath name}}" target="_blank">
             <i class="blue file outline icon"></i>
             <div class="content">
               <div class="header">

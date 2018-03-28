@@ -36,6 +36,13 @@ Template.explorer.helpers({
     const currentPath = Template.instance().currentPath.get();
     return currentPath === '/';
   },
+  currentPath() {
+    return Template.instance().currentPath.get();
+  },
+  noSlash(path, filename) {
+    const shortPath = path.substr(1);
+    return `/file/${encodeURIComponent(shortPath + filename)}`;
+  },
 });
 
 Template.explorer.events({
