@@ -19,7 +19,7 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/explorer/:path?', {
+FlowRouter.route('/explorer', {
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   name: 'explorer',
   action() {
