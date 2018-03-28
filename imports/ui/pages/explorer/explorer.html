@@ -1,0 +1,42 @@
+<template name="explorer">
+  <div class="ui basic segment">
+    <div class="ui disabled fluid icon input" id="searchFile">
+      <input type="text" placeholder="Search...">
+      <i class="search icon"></i>
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui link selection list">
+      {{#unless isRootDirectory}}
+        <a class="item goParentDirectory">
+          <i class="chevron left icon"></i>
+          <div class="content">
+            Parent directory
+          </div>
+        </a>
+      {{/unless}}
+      {{#each filesList}}
+        {{#if isDirectory}}
+          <a class="item changePath">
+            <i class="yellow folder icon"></i>
+            <div class="content">
+              <div class="header">
+                {{name}}
+              </div>
+            </div>
+          </a>
+        {{/if}}
+        {{#if isFile}}
+          <a class="item" href="/file/{{name}}" target="_blank">
+            <i class="blue file outline icon"></i>
+            <div class="content">
+              <div class="header">
+                {{name}}
+              </div>
+              <span class="description"><em>{{humanFileSize size}}</em></span>
+            </div>
+          </a>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</template>

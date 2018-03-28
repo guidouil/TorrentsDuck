@@ -6,6 +6,7 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/filesList/filesList.js';
+import '../../ui/pages/explorer/explorer.js';
 import '../../ui/pages/usersList/usersList.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/components/customAtForm/customAtForm.js';
@@ -15,6 +16,14 @@ FlowRouter.route('/', {
   name: 'home',
   action() {
     BlazeLayout.render('appBody', { main: 'home' });
+  },
+});
+
+FlowRouter.route('/explorer/:path?', {
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  name: 'explorer',
+  action() {
+    BlazeLayout.render('appBody', { main: 'explorer' });
   },
 });
 

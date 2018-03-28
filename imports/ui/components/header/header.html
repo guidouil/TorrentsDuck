@@ -6,7 +6,8 @@
         <!-- {{> logo src='/img/duck_white.svg' class='mini'}} -->
       </a>
       {{#if isValidOrIsAdmin}}
-        <a class="item {{isActiveRoute 'filesList'}}" title="Files list" href="/files-list"><i class="folder icon"></i></a>
+        <a class="item {{isActiveRoute 'explorer'}}" title="Files explorer" href="/explorer"><i class="folder open icon"></i></a>
+        <a class="item {{isActiveRoute 'filesList'}}" title="Archives list" href="/files-list"><i class="archive icon"></i></a>
       {{/if}}
       {{#if currentUser.isAdmin}}
         <a class="item {{isActiveRoute 'usersList'}}" title="Users list" href="/users-list"><i class="users icon"></i></a>
