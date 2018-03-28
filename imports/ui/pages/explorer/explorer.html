@@ -27,12 +27,12 @@
         {{/if}}
         {{#if isFile}}
           <a class="item" href="{{noSlash currentPath name}}" target="_blank">
+            <div class="right floated content"><em>{{humanFileSize size}}</em></div>
             <i class="blue file outline icon"></i>
             <div class="content">
               <div class="header">
                 {{name}}
               </div>
-              <span class="description"><em>{{humanFileSize size}}</em></span>
             </div>
           </a>
         {{/if}}
