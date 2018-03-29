@@ -40,11 +40,13 @@ First user registered get admin rights but only after a meteor server restart.
 
 * [Meteor](https://www.meteor.com/) - The node.js full stack
 * [webtorrent](https://webtorrent.io/) - A streaming torrent client for node.js
+* [ftp-srv](https://github.com/trs/ftp-srv) - 📮 Modern FTP Server
 * [Semantic-UI](https://semantic-ui.com/) - A UI component framework based around useful principles from natural language.
 
 ## Authors
 
 * **Guillaume Darbonne** - *Initial work* - [Guidouil](https://github.com/guidouil)
+* **Jérémy** - *French Doc* - [PixiBixi](https://github.com/PixiBixi)
 
 See also the list of [contributors](https://github.com/guidouil/TorrentsDuck/contributors) who participated in this project.
 
