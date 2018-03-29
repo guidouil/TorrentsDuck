@@ -1,5 +1,5 @@
 {
-  "torrentMaxConnections": 99,
+  "torrentMaxConnections": 55,
   "torrentsPath": "/data/torrents/",
   "uploadsPath": "/data/uploads/",
   "serverIp": "MY.SERVER.IP.ADDRESS",

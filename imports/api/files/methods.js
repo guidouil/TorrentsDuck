@@ -21,19 +21,7 @@ Meteor.methods({
     const user = Meteor.user();
     if (!validateUser(user)) return false;
 
-    const fileRef = Files.findOne({ _id });
-    if (fileRef && fileRef.files) {
-      _.each(fileRef.files, (file) => {
-        const filePath = Meteor.settings.torrentsPath + file;
-        fs.unlink(filePath, (error) => {
-          if (error) {
-            throw new Meteor.Error(500, error);
-          }
-        });
-      });
-      Files.remove({ _id });
-    }
-    return true;
+    return Files.remove({ _id });
   },
   listFiles(path = '') {
     check(path, String);

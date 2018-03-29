@@ -95,10 +95,10 @@ Meteor.methods({
       if (transfer && transfer.progress === 1) {
         // archive torrent info
         const {
-          name, files, size, torrentRef, createdAt,
+          name, size, torrentRef, createdAt,
         } = transfer;
         Files.upsert({ _id: torrentId }, {
-          name, files, size, torrentRef, createdAt,
+          name, size, torrentRef, createdAt,
         });
       } else if (transfer.files) {
         // Delete incomplete files

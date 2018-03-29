@@ -22,12 +22,6 @@ Meteor.startup(() => {
     const { torrents } = webTorrentClient;
     if (torrents && torrents.length) {
       _.each(torrents, (torrent) => {
-        const files = [];
-        if (torrent.files && torrent.files.length > 0) {
-          _.each(torrent.files, (file) => {
-            files.push(file.path);
-          });
-        }
         Transfers.update(
           { _id: torrent.infoHash },
           {
@@ -44,7 +38,6 @@ Meteor.startup(() => {
               path: torrent.path,
               size: torrent.length,
               stopped: false,
-              files,
             },
           },
         );

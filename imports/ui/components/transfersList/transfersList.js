@@ -160,8 +160,4 @@ Template.transfersList.events({
     }
     templateInstance.transfersPagination.filters(filters);
   },
-  'click .transferName'(event, templateInstance) {
-    templateInstance.currentFiles.set(this.files);
-    $('.filesModal').modal('show');
-  },
 });
