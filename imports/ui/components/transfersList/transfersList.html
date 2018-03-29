@@ -56,14 +56,16 @@
       {{#each tranfers}}
       <tr>
         <td>
-          {{#if stopped}}
-            <i class="red circle icon"></i>
-            {{else}}
-            <i class="green circle icon"></i>
-          {{/if}}
           <a href="#" class="transferName">{{truncate name 50}}</a>
         </td>
-        <td>{{humanFileSize size true}}</td>
+        <td>
+          {{#if stopped}}
+            <i class="red circle icon"></i>
+          {{else}}
+            <i class="green circle icon"></i>
+          {{/if}}
+          {{humanFileSize size true}}
+        </td>
         <td class="two wide center aligned">
           <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
             <div class="bar">
