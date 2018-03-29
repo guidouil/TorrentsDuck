@@ -18,9 +18,9 @@
       </div>
       <div class="two wide field desktop-only">
         <select class="ui fluid dropdown" name="perPage" id="perPage">
-          <option value="50">50</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
+          <option value=50>50</option>
+          <option value=100>100</option>
+          <option value=200>200</option>
         </select>
       </div>
       <div class="two wide field">
@@ -34,100 +34,102 @@
 
   <div class="ui horizontal divider"></div>
 
-  <div id="tranfersList">
-    <table class="ui single line selectable yellow table">
-      <thead>
-        <tr>
-          <th colspan="5">Transfers</th>
-          <th class="right aligned">
-            {{#if torrentsStats}}
-            <div class="ui green basic label">
-              <i class="cloud download icon" title="Total Download"></i>
-              {{humanFileSize torrentsStats.down false}}/s
-            </div>
-            <div class="ui red basic label">
-              <i class="cloud upload icon" title="Total Upload"></i>
-              {{humanFileSize torrentsStats.up false}}/s
-            </div>
-            {{/if}}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each tranfers}}
-        <tr>
-          <td>
-            {{#if stopped}}
-              <i class="red circle icon"></i>
-              {{else}}
-              <i class="green circle icon"></i>
-            {{/if}}
-            <a href="#" class="transferName">{{truncate name 80}}</a>
-          </td>
-          <td>{{humanFileSize size true}}</td>
-          <td class="two wide center aligned">
-            <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
-              <div class="bar">
-                <div class="progress"></div>
-              </div>
-            </div>
-            {{initProgress}}
-          </td>
-          <td class="center aligned">
-            <div class="ui small labels">
-              <div class="ui label">
-                <i class="cloud download icon" title="Download"></i>
-                {{humanFileSize downloadSpeed false}}/s
-              </div>
-              <div class="ui label">
-                <i class="cloud upload icon" title="Upload"></i>
-                {{humanFileSize uploadSpeed false}}/s
-              </div>
-              <div class="ui label">
-                <i class="chart line icon" title="Ratio"></i>
-                {{roundTwo ratio}}
-              </div>
-              <div class="ui label">
-                <i class="users icon" title="Peers"></i>
-                {{numPeers}}
-              </div>
-            </div>
-          </td>
-          <td class="center aligned">
-            <div class="ui basic label">
-              <i class="clock icon" title="Remaining time"></i>
-              {{convertMs timeRemaining}}
-            </div>
-          </td>
-          <td class="right aligned">
-            {{#if stopped}}
-            <button class="ui green compact icon button restartTorrent" data-tooltip="Restart torrent" data-inverted="" data-position="top right">
-              <i class="sync icon"></i>
-            </button>
-            {{/if}}
-            {{#if paused}}
-              <button class="ui primary compact icon button resumeTorrent" data-tooltip="Resume peers search" data-inverted="" data-position="top right">
-                <i class="play icon"></i>
-              </button>
+  <table class="ui single line selectable yellow table">
+    <thead>
+      <tr>
+        <th colspan="5">Transfers</th>
+        <th class="right aligned">
+          {{#if torrentsStats}}
+          <div class="ui green basic label">
+            <i class="cloud download icon" title="Total Download"></i>
+            {{humanFileSize torrentsStats.down false}}/s
+          </div>
+          <div class="ui red basic label">
+            <i class="cloud upload icon" title="Total Upload"></i>
+            {{humanFileSize torrentsStats.up false}}/s
+          </div>
+          {{/if}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tranfers}}
+      <tr>
+        <td>
+          {{#if stopped}}
+            <i class="red circle icon"></i>
             {{else}}
-              <button class="ui yellow compact icon button pauseTorrent" data-tooltip="Pause peers search" data-inverted="" data-position="top right">
-                <i class="pause icon"></i>
-              </button>
-            {{/if}}
-            <button class="ui red compact icon button removeTorrent" data-tooltip="Remove torrent" data-inverted="" data-position="top right">
-              <i class="remove icon"></i>
+            <i class="green circle icon"></i>
+          {{/if}}
+          <a href="#" class="transferName">{{truncate name 80}}</a>
+        </td>
+        <td>{{humanFileSize size true}}</td>
+        <td class="two wide center aligned">
+          <div class="ui indicating progress torrentProgress" id="progress{{_id}}">
+            <div class="bar">
+              <div class="progress"></div>
+            </div>
+          </div>
+          {{initProgress}}
+        </td>
+        <td class="center aligned">
+          <div class="ui small labels">
+            <div class="ui label">
+              <i class="cloud download icon" title="Download"></i>
+              {{humanFileSize downloadSpeed false}}/s
+            </div>
+            <div class="ui label">
+              <i class="cloud upload icon" title="Upload"></i>
+              {{humanFileSize uploadSpeed false}}/s
+            </div>
+            <div class="ui label">
+              <i class="chart line icon" title="Ratio"></i>
+              {{roundTwo ratio}}
+            </div>
+            <div class="ui label">
+              <i class="users icon" title="Peers"></i>
+              {{numPeers}}
+            </div>
+          </div>
+        </td>
+        <td class="center aligned">
+          {{#if timeRemaining}}
+          <div class="ui basic label">
+            <i class="clock icon" title="Remaining time"></i>
+            {{convertMs timeRemaining}}
+          </div>
+          {{/if}}
+        </td>
+        <td class="right aligned">
+          {{#if stopped}}
+          <button class="ui green compact icon button restartTorrent" data-tooltip="Restart torrent" data-inverted="" data-position="top right">
+            <i class="sync icon"></i>
+          </button>
+          {{/if}}
+          {{#if paused}}
+            <button class="ui primary compact icon button resumeTorrent" data-tooltip="Resume peers search" data-inverted="" data-position="top right">
+              <i class="play icon"></i>
             </button>
-          </td>
-        </tr>
-        {{else}}
-          <td class="center aligned" colspan="6">
-            <strong>No transfers found 😕</strong>
-          </td>
-        {{/each}}
-      </tbody>
-    </table>
-    {{> defaultBootstrapPaginator pagination=transfersPagination limit=50 containerClass="center aligned"}}
-  </div>
+          {{else}}
+            <button class="ui yellow compact icon button pauseTorrent" data-tooltip="Pause peers search" data-inverted="" data-position="top right">
+              <i class="pause icon"></i>
+            </button>
+          {{/if}}
+          <button class="ui red compact icon button removeTorrent" data-tooltip="Remove torrent" data-inverted="" data-position="top right">
+            <i class="remove icon"></i>
+          </button>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td class="center aligned" colspan="6">
+          <strong>No transfers found 😕</strong>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{> defaultBootstrapPaginator pagination=transfersPagination limit=50 containerClass="center aligned"}}
 
   <div class="ui modal filesModal">
     <i class="close icon"></i>

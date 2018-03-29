@@ -1,6 +1,10 @@
 # Old school Meteor deploy
 
-⚠️ Not as root user!
+For testing purpose only not for production
+
+Requirements: Meteor, MongoDB, node 8 or better and forever npm package
+
+⚠️ **Not as root user!** ⚠️
 
 ```sh
 cd
@@ -21,8 +25,8 @@ npm install
 cd
 export MONGO_URL='mongodb://127.0.0.1:27017/torrentsduck'
 export PORT=1337
-export ROOT_URL='http://cmapage.com:1337'
-export METEOR_SETTINGS=$(cat ~/torrentsduck-source/settings.json)
+export ROOT_URL='http://MY_DOMAIN.com:1337'
+export METEOR_SETTINGS=$(cat ~/torrentsduck-source/private/settings-dev.json)
 forever start --append --uid "torrentsduck" torrentsduck/main.js
 date
 

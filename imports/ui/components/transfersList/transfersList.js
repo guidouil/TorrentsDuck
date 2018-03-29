@@ -11,6 +11,7 @@ import './transfersList.html';
 Template.transfersList.onCreated(() => {
   const instance = Template.instance();
   instance.transfersPagination = new Meteor.Pagination(Transfers, {
+    perPage: 50,
     sort: {
       progress: -1,
     },

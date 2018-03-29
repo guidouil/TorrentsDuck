@@ -23,7 +23,7 @@ meteor npm install
 
 Once done, you can run your local copy with this command
 ```
-meteor --settings settings.json
+meteor --settings private/settings-dev.json
 ```
 
 First user registered get admin rights but only after a meteor server restart.
@@ -34,7 +34,7 @@ First user registered get admin rights but only after a meteor server restart.
 
 ## Deployment
 
-[Follow the Meteor Up deployement guide](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy.md) [disponible en Français](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy_FR.md)
+[Follow the Meteor Up deployement guide](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy.md) - [disponible en Français](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy_FR.md)
 
 ## Built With
 
