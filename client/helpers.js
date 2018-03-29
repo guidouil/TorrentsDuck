@@ -42,3 +42,8 @@ Template.registerHelper('roundTwo', (num) => {
   }
   return Math.round(num * 100) / 100;
 });
+
+Template.registerHelper('makeLink', (path, filename = '') => {
+  const shortPath = path.substr(1);
+  return `/file/${encodeURIComponent(shortPath + filename)}`;
+});

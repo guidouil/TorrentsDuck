@@ -39,10 +39,10 @@ Meteor.methods({
       await Transfers.upsert({ _id }, { $set: transfer });
     }
 
+    const maxConns = Meteor.settings.torrentMaxConnections;
     const path = Meteor.settings.torrentsPath;
     const userId = user._id;
-    webTorrentClient.add(torrentRef, { path }, (torrent) => {
-
+    webTorrentClient.add(torrentRef, { maxConns, path }, (torrent) => {
       if (torrent.ready) {
         const transfer = {
           name: torrent.name,
@@ -50,6 +50,7 @@ Meteor.methods({
           uploadSpeed: 0,
           timeRemaining: '',
           createdAt: new Date(),
+          stopped: false,
           torrentRef,
           userId,
         };
@@ -93,17 +94,30 @@ Meteor.methods({
       const transfer = Transfers.findOne({ _id: torrentId });
       if (transfer && transfer.progress === 1) {
         // archive torrent info
-        const { name, files, size, torrentRef, createdAt } = transfer;
-        Files.upsert({ _id: torrentId }, { name, files, size, torrentRef, createdAt });
+        const {
+          name, files, size, torrentRef, createdAt,
+        } = transfer;
+        Files.upsert({ _id: torrentId }, {
+          name, files, size, torrentRef, createdAt,
+        });
       } else if (transfer.files) {
-        // Delete files
+        // Delete incomplete files
         _.each(transfer.files, (file) => {
           const filePath = Meteor.settings.torrentsPath + file;
           fs.unlinkSync(filePath);
         });
       }
+      // allways remove torrent
       webTorrentClient.remove(torrentId);
     }
     return Transfers.remove({ _id: torrentId });
+  },
+  getTorrentsStats() {
+    const user = Meteor.user();
+    if (!validateUser(user)) return false;
+
+    const down = webTorrentClient.downloadSpeed;
+    const up = webTorrentClient.uploadSpeed;
+    return { down, up };
   },
 });

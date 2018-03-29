@@ -16,10 +16,26 @@ Template.transfersList.onCreated(() => {
     },
   });
   instance.currentFiles = new ReactiveVar();
+  instance.torrentsStats = new ReactiveVar();
+  Meteor.call('getTorrentsStats', (error, torrentsStats) => {
+    if (error) sAlert.error(error);
+    if (torrentsStats) {
+      instance.torrentsStats.set(torrentsStats);
+    }
+  });
 });
 
-Template.transfersList.onRendered(function() {
+Template.transfersList.onRendered(() => {
   $('.dropdown').dropdown();
+  const instance = Template.instance();
+  Meteor.setInterval(() => {
+    Meteor.call('getTorrentsStats', (error, torrentsStats) => {
+      if (error) sAlert.error(error);
+      if (torrentsStats) {
+        instance.torrentsStats.set(torrentsStats);
+      }
+    });
+  }, 10000);
 });
 
 Template.transfersList.helpers({
@@ -31,6 +47,9 @@ Template.transfersList.helpers({
   },
   currentFiles() {
     return Template.instance().currentFiles.get();
+  },
+  torrentsStats() {
+    return Template.instance().torrentsStats.get();
   },
   initProgress() {
     const torrent = this;
@@ -57,9 +76,9 @@ Template.transfersList.helpers({
     h %= 24;
     return `${d}d ${h}h ${m}m ${s}s`;
   },
-  truncate(name) {
-    if (name && name.length > 50) {
-      return `${name.substring(0, 50)}...`;
+  truncate(name, size) {
+    if (name && name.length > size) {
+      return `${name.substring(0, size)}…`;
     }
     return name;
   },

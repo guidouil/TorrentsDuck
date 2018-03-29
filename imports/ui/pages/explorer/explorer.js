@@ -41,10 +41,6 @@ Template.explorer.helpers({
   currentPath() {
     return Template.instance().currentPath.get();
   },
-  noSlash(path, filename) {
-    const shortPath = path.substr(1);
-    return `/file/${encodeURIComponent(shortPath + filename)}`;
-  },
 });
 
 Template.explorer.events({
@@ -73,5 +69,6 @@ Template.explorer.events({
     const filesList = _.filter(filesListSource, file =>
       file.name.toLowerCase().includes(query.toLowerCase()));
     templateInstance.filesList.set(filesList);
+    return true;
   },
 });

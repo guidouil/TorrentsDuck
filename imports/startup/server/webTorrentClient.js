@@ -7,9 +7,16 @@ import Transfers from '../../api/transfers/transfers.js';
 Meteor.startup(() => {
   const webTorrentClient = new WebTorrent();
 
-  // webTorrentClient.on('torrent', (torrent) => {
-  //   console.log('client', torrent.infoHash);
-  // });
+  // on startup and error all transfers should be mark as stopped
+  async function transfersStopped() {
+    await Transfers.update({}, { $set: { stopped: true } }, { multi: true });
+  }
+  webTorrentClient.on('ready', () => {
+    transfersStopped();
+  });
+  webTorrentClient.on('error', () => {
+    transfersStopped();
+  });
 
   Meteor.setInterval(() => {
     const { torrents } = webTorrentClient;
@@ -36,9 +43,10 @@ Meteor.startup(() => {
               numPeers: torrent.numPeers,
               path: torrent.path,
               size: torrent.length,
+              stopped: false,
               files,
-            }
-          }
+            },
+          },
         );
       });
     }
