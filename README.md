@@ -12,21 +12,57 @@ These instructions will get you a copy of the project up and running on your loc
 
 You need to install Meteor. [Follow the instructions](https://www.meteor.com/install).
 
-### Installing
+You also need a local install of MongoDB
 
-Clone or download this repositery and using your terminal in `TorrentsDuck` folder and install dependencies
+you must have two folder writable for your profile from root of hard drive `/data/torrents/` and `/data/uploads/`
 
+### Installing and running the main app
+
+Clone or download this repositery and using your terminal in `TorrentsDuck/duck` folder and install dependencies
 
 ```
 meteor npm install
 ```
 
-Once done, you can run your local copy with this command
+Once done, you can run your local copy with this command of the front end
+
 ```
-meteor --settings private/settings-dev.json
+export MONGO_URL='mongodb://127.0.0.1:27017/TorrentsDuck' && meteor --settings private/settings-dev.json -p 3000
 ```
 
-First user registered get admin rights but only after a meteor server restart.
+Now go register on [http://localhost:3000](http://localhost:3000). First user registered get admin rights but only after a meteor server restart if there is only one user.
+
+### Installing and running the bittorrent client app
+
+In another terminal go to the `TorrentsDuck/torrents` directory and install dependencies
+
+```
+meteor npm install
+```
+
+Once done, you can run your local bittorent client
+
+```
+export MONGO_URL='mongodb://127.0.0.1:27017/TorrentsDuck' && meteor --settings private/settings-dev.json -p 3001
+```
+
+Now you can start torrents transfert from the [main interface](http://localhost:3000)
+
+### Installing and running the FTP server
+
+In another terminal go to the `TorrentsDuck/ftp` directory and install dependencies
+
+```
+meteor npm install
+```
+
+Once done, you can run your local ftp server
+
+```
+export MONGO_URL='mongodb://127.0.0.1:27017/TorrentsDuck' && meteor --settings private/settings-dev.json -p 3002
+```
+
+Now you can connect by ftp on `127.0.0.1:9876` using the login and password you created on the main web interface
 
 ## Running the tests
 
@@ -34,7 +70,7 @@ First user registered get admin rights but only after a meteor server restart.
 
 ## Deployment
 
-[Follow the Meteor Up deployement guide](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy.md) - [disponible en Français](https://github.com/guidouil/TorrentsDuck/blob/master/private/mupDeploy_FR.md)
+[Follow the Meteor Up deployement guide](https://github.com/guidouil/TorrentsDuck/blob/master/_docs/mupDeploy.md) - [disponible en Français](https://github.com/guidouil/TorrentsDuck/blob/master/_docs/mupDeploy_FR.md)
 
 ## Built With
 

@@ -21,10 +21,10 @@ You must have the following tools installed on your PC (not on the server)
 * Node.js ➡️ [install instructions](https://nodejs.org/)
 * Meteor Up ➡️ [install instructions](http://meteor-up.com/)
 
-# Deployement in 6 steps
+# Deployement in 7 steps
 
 ## 1. Get the source code
-Open your favorite terminal and go into the directory which you want to store `Torrents Duck` source code and type the following command. This directory is referenced as `path/to/app` later on.
+Open your favorite terminal and go into the directory which you want to store `Torrents Duck` source code and type the following command. This directory is referenced as `path/to/TorrentsDuck` later on.
 
 ```sh
 git clone https://github.com/guidouil/TorrentsDuck.git
@@ -32,70 +32,102 @@ git clone https://github.com/guidouil/TorrentsDuck.git
 
 ## 2. Setting up Meteor Up for your server *(this is the hardest part)*
 
-Now that you have all dependencies and the source code, we are going to setup Meteor Up to inject the seedbox to your server. Go in source code folder on your local machine and init `mup` with the following commands:
+Now that you have all dependencies and the source code, we are going to setup Meteor Up to inject the seedbox to your server. TorrentsDuck is cutted in 3 containers (duck, torrents and ftp) to be more reliable and use more CPU threads. Go in source code folder on your local machine and copy your `mup` deployement scripts with the following commands (Don't be scared your `.deploy` folder is already mentioned in the `.gitignore`):
 
 ```sh
-cd path/to/app
-mkdir .deploy && cd .deploy
-mup init
-cp -f ../private/settings-dist.json ./settings.json
-cp -f ../private/mup-dist.js ./mup.js
+cd path/to/TorrentsDuck
+cp .deploy-dist .deploy
 ```
 
-Now you have to edit the server informations presents in the `.deploy/mup.js` file. You have to change all iterations of the following words with what is appropriate for your server:
+Now you have to edit the server informations presents in the `.deploy/duck/mup.js`, `.deploy/torrents/mup.js` and `.deploy/ftp/mup.js`  files. You have to change all iterations of the following words with what is appropriate for your server:
 
 * MY.SERVER.IP.ADDRESS
 * MY_SERVER_SUDOER_USERNAME
 * MY_SERVER_SUDOER_USERNAME_PASSWORD
 * MY_DOMAIN
 
-You must also change `MY.SERVER.IP.ADDRESS` in the `.deploy/settings.json` file
+You must also change `MY.SERVER.IP.ADDRESS` in the `.deploy/duck/settings.json` file and once done copy this settings.json file and past it in the `.deploy/torrents/` and `.deploy/ftp/` directorys (or apply same modifications to  `settings.json` already present)
 
-If you change a path in the `.deploy/settings.json` file, please make sure to change the `volumes:` in `.deploy/mup.js` alike.
+If you change a path in the `settings.json` file, please make sure to change the `volumes:` in all `mup.js` files alike.
 
-## 3. Setting up the ubuntu server
+## 3. Setting up and deploying the main web app
 
-This is going to install Docker, nginx, MongoDB and other dependencies... and yes it is all executed from your PC.
+This is going to install Docker, nginx proxy, MongoDB and other dependencies (also generate ssl)... and yes it is all executed from your PC.
 
 ```sh
-cd path/to/app
-cd .deploy
+cd path/to/TorrentsDuck
+cd .deploy/duck
 mup setup
+mup deploy
 ```
 
-## 4. Build the app and deploy it to the server
+## 4. Setting up and deploying the bittorent client
 
 This is also the same command to upgrade after you `pull` updates from git or simply restart the app
 
 ```sh
-cd path/to/app
-cd .deploy
+cd path/to/TorrentsDuck
+cd .deploy/torrents
+mup setup
 mup deploy
 ```
 
-Now the web interface is ready but we're still missing the FTP
-
-## 5. Open the ports for FTP passive mode with iptable
-
-To make FTP accessible from the Internet, we need to translate some ports to your container. Adapt the following commands if you changed the ports from `.deploy/settings.json`.
+## 5. Setting up and deploying the FTP server
 
 ```sh
-cd path/to/app
-cd .deploy
+cd path/to/TorrentsDuck
+cd .deploy/ftp
+mup setup
+mup deploy
+```
+
+Now the web interface, bittorent and the ftp are ready but we're still can't connect to the FTP. Check containers status with `mup docker ps`
+
+## 6. Open the ports for FTP passive mode with iptable
+
+To make FTP accessible from the Internet, we need to translate some ports to the FTP server container. And to do so we need it's IP address. To figure this out we use this commands
+
+```sh
+cd path/to/TorrentsDuck
+cd .deploy/duck
 mup ssh
-sudo iptables -t nat -A DOCKER -p tcp --dport 9876 -j DNAT --to-destination 172.17.0.5:9876
-sudo iptables -t nat -A DOCKER -p tcp --dport 8000:9000 -j DNAT --to-destination 172.17.0.5:8000-9000
+docker exec -it FTP bash
+ip addr show
+```
+
+Here you get two network devices status. The localhost and as second devive the `eth0`. The second line contains the ip of the ftp server. For me it is `172.17.0.7`
+
+Now we can translate the port from the serer to the ftp container. Adapt the following commands with the IP you found and also if you changed the ports from `settings.json`.
+
+```sh
+cd path/to/TorrentsDuck
+cd .deploy/duck
+mup ssh
+sudo iptables -t nat -A DOCKER -p tcp --dport 9876 -j DNAT --to-destination 172.17.0.7:9876
+sudo iptables -t nat -A DOCKER -p tcp --dport 8000:9000 -j DNAT --to-destination 172.17.0.7:8000-9000
 ```
 
 You can check the setted iptables rules with this command: `sudo iptables -t nat -L -n`
 
-## 6. Get admin right
+If you have some rules you want to remove (previous installs) list nat routes :
+
+```sh
+sudo iptables -t nat -L --line-numbers
+```
+
+And delet the rules you want with it's line number
+
+```sh
+sudo iptables -t nat -D DOCKER 2
+```
+
+## 7. Get admin right
 
 This is not a "bug" : **only the first account of the platform gets admin rights** (for now). So you need to create the first user using the `sign-up` from the website we just deployd. Once you have your first account, you need to restart the node application hosted on your server with the following commands :
 
 ```sh
-cd path/to/app
-cd .deploy
+cd path/to/TorrentsDuck
+cd .deploy/duck
 mup meteor restart
 ```
 
@@ -110,6 +142,7 @@ All `mup` commands must be run from the `.deploy` folder of the app from your PC
 ```sh
 // Get system status
 mup status
+mup docker ps
 mup meteor status
 mup mongo status
 mup nginx status
