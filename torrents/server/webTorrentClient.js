@@ -18,33 +18,42 @@ Meteor.startup(() => {
     transfersStopped();
   });
 
-  Meteor.setInterval(() => {
-    // Updating current transfers status
-    const { torrents } = webTorrentClient;
-    if (torrents && torrents.length) {
-      _.each(torrents, (torrent) => {
-        Transfers.update(
-          { _id: torrent.infoHash },
-          {
-            $set: {
-              timeRemaining: torrent.timeRemaining,
-              received: torrent.received,
-              downloaded: torrent.downloaded,
-              uploaded: torrent.uploaded,
-              downloadSpeed: torrent.downloadSpeed,
-              uploadSpeed: torrent.uploadSpeed,
-              progress: torrent.progress,
-              ratio: torrent.ratio,
-              numPeers: torrent.numPeers,
-              path: torrent.path,
-              size: torrent.length,
-              stopped: false,
-            },
-          },
-        );
-      });
-    }
-  }, 3333);
+  async function updateTransfer(torrent) {
+    return Transfers.update(
+      { _id: torrent.infoHash },
+      {
+        $set: {
+          timeRemaining: torrent.timeRemaining,
+          received: torrent.received,
+          downloaded: torrent.downloaded,
+          uploaded: torrent.uploaded,
+          downloadSpeed: torrent.downloadSpeed,
+          uploadSpeed: torrent.uploadSpeed,
+          progress: torrent.progress,
+          ratio: torrent.ratio,
+          numPeers: torrent.numPeers,
+          path: torrent.path,
+          size: torrent.length,
+          stopped: false,
+        },
+      },
+    );
+  }
+
+  webTorrentClient.on('torrent', (torrent) => {
+    torrent.on('download', () => {
+      updateTransfer(torrent);
+    });
+    torrent.on('upload', () => {
+      updateTransfer(torrent);
+    });
+    torrent.on('done', () => {
+      updateTransfer(torrent);
+    });
+    torrent.on('error', () => {
+      console.error(error);
+    });
+  });
 
   export default webTorrentClient;
 });
