@@ -8,7 +8,7 @@ Meteor.startup(() => {
     timeout: 3000,
     html: false,
     onRouteClose: false,
-    stack: true,
+    stack: false,
     beep: {
       error: '/quack.mp3',
       warning: '/quack.mp3',

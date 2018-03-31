@@ -70,6 +70,7 @@ observe-sequence@1.0.16
 ordered-dict@1.1.0
 ostrio:cookies@2.2.4
 ostrio:files@1.9.9
+percolate:synced-cron@1.3.2
 practicalmeteor:mocha-core@1.0.1
 promise@0.10.2
 random@1.1.0

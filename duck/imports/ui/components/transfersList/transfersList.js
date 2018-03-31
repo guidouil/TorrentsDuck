@@ -5,6 +5,7 @@ import { $ } from 'meteor/jquery';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import Transfers from '../../../api/transfers/transfers.js';
+import Statistics from '../../../api/statistics/statistics.js';
 
 import './transfersList.html';
 
@@ -16,6 +17,7 @@ Template.transfersList.onCreated(() => {
       progress: 1,
     },
   });
+  instance.subscribe('allStatistics');
 });
 
 Template.transfersList.onRendered(() => {
@@ -60,6 +62,9 @@ Template.transfersList.helpers({
     }
     return name;
   },
+  torrentsStatistics() {
+    return Statistics.findOne({ _id: 'webTorrentClient' });
+  },
 });
 
 Template.transfersList.events({
@@ -68,7 +73,7 @@ Template.transfersList.events({
     Meteor.call('stopTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.info('Torrent stopping');
+        sAlert.info('The torrent will stop in 10 sec or less ⏳');
       }
     });
   },
@@ -77,7 +82,7 @@ Template.transfersList.events({
     Meteor.call('startTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success('Torrent starting');
+        sAlert.success('The torrent will start in 10 sec or less ⏳');
       }
     });
   },
@@ -86,7 +91,7 @@ Template.transfersList.events({
     Meteor.call('removeTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success('Torrent being removed');
+        sAlert.success('The torrent will be removed in 10 sec or less ⏳');
       }
     });
   },

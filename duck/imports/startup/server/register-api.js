@@ -3,6 +3,9 @@ import '../../api/system/methods.js';
 
 import '../../api/torrentFiles/torrentFiles.js';
 
+// import '../../api/statistics/methods.js';
+import '../../api/statistics/server/publications.js';
+
 import '../../api/users/methods.js';
 import '../../api/users/server/publications.js';
 

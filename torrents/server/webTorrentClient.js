@@ -32,8 +32,6 @@ Meteor.startup(() => {
           progress: torrent.progress,
           ratio: torrent.ratio,
           numPeers: torrent.numPeers,
-          path: torrent.path,
-          size: torrent.length,
           stopped: false,
         },
       },

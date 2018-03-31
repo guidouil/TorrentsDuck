@@ -5,6 +5,7 @@ import webTorrentClient from './webTorrentClient.js';
 
 import Transfers from './collections/transfers.js';
 import Torrents from './collections/torrents.js';
+import Statistics from './collections/statistics.js';
 
 async function upsertTransfer(_id, transfer) {
   return Transfers.upsert({ _id }, { $set: transfer });
@@ -19,15 +20,22 @@ async function removeTorrent(_id) {
   return Torrents.remove({ _id });
 }
 
-/* eslint-disable */
+async function writeStatistics(statistics) {
+  return Statistics.upsert({ _id: 'webTorrentClient' }, { $set: statistics });
+}
+
+
 Meteor.methods({
-  startTorrent: function (torrentToStart) {
+  startTorrent(torrentToStart) {
     this.unblock();
+    if (this.connection !== null) {
+      throw new Meteor.Error('403', 'Not authorized');
+    }
     check(torrentToStart, Object);
 
     const maxConns = Meteor.settings.torrentMaxConnections;
     const path = Meteor.settings.torrentsPath;
-    const { _id, torrentRef, userName } = torrentToStart;
+    const { _id, torrentRef, username, userId } = torrentToStart;
     webTorrentClient.add(torrentRef, { maxConns, path }, (torrent) => {
       if (torrent.ready) {
         upsertTransfer(torrent.infoHash, {
@@ -36,10 +44,12 @@ Meteor.methods({
           uploadSpeed: 0,
           timeRemaining: Infinity,
           createdAt: new Date(),
+          size: torrent.length,
           stopped: false,
           torrentId: _id,
           torrentRef,
-          userName,
+          username,
+          userId,
         });
         updateTorrent(torrentToStart._id, {
           toStart: false,
@@ -50,8 +60,12 @@ Meteor.methods({
       }
     });
   },
-  stopTorrent: function (torrentToStop) {
+
+  stopTorrent(torrentToStop) {
     this.unblock();
+    if (this.connection !== null) {
+      throw new Meteor.Error('403', 'Not authorized');
+    }
     check(torrentToStop, Object);
 
     if (torrentToStop.transferId) {
@@ -68,8 +82,12 @@ Meteor.methods({
       updateTorrent(torrentToStop._id, { toStop: false });
     }
   },
-  removeTorrent: function (torrentToRemove) {
+
+  removeTorrent(torrentToRemove) {
     this.unblock();
+    if (this.connection !== null) {
+      throw new Meteor.Error('403', 'Not authorized');
+    }
     check(torrentToRemove, Object);
 
     if (torrentToRemove.transferId) {
@@ -81,5 +99,13 @@ Meteor.methods({
       removeTorrent(torrentToRemove._id);
     }
   },
+
+  giveStatistics() {
+    this.unblock();
+    if (this.connection !== null) {
+      throw new Meteor.Error('403', 'Not authorized');
+    }
+    const { downloadSpeed, uploadSpeed } = webTorrentClient;
+    writeStatistics({ downloadSpeed, uploadSpeed });
+  },
 });
-/* eslint-enable */

@@ -30,7 +30,7 @@ Template.sendTorrent.events({
           Meteor.call('addTorrent', fileObj.path, (transferError, success) => {
             if (transferError) sAlert.error(transferError);
             if (success) {
-              sAlert.success('Torrent added 😃');
+              sAlert.success('The torrent will start in 10 sec or less ⏳');
             }
           });
         }
@@ -50,7 +50,7 @@ Template.sendTorrent.events({
         document.getElementById('sendTorrentForm').reset();
         if (transferError) sAlert.error(transferError);
         if (success) {
-          sAlert.success('Torrent added from URL 🚀');
+          sAlert.success('The torrent will start in 10 sec or less ⏳');
         }
       });
       return true;

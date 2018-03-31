@@ -4,10 +4,14 @@ import { _ } from 'meteor/underscore';
 
 import Torrents from './collections/torrents.js';
 
+SyncedCron.config({
+  log: false,
+  collectionTTL: 3600,
+});
+
 SyncedCron.add({
   name: 'Check for torrents actions',
   schedule(parser) {
-    // parser is a later.parse object
     return parser.text('every 10 sec');
   },
   job() {
@@ -34,6 +38,16 @@ SyncedCron.add({
         Meteor.call('removeTorrent', torrentToRemove);
       });
     }
+  },
+});
+
+SyncedCron.add({
+  name: 'Give torrents statistics',
+  schedule(parser) {
+    return parser.text('every 30 sec');
+  },
+  job() {
+    Meteor.call('giveStatistics');
   },
 });
 

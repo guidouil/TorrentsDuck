@@ -37,17 +37,19 @@
   <table class="ui single line selectable yellow table">
     <thead>
       <tr>
-        <th colspan="5">Transfers</th>
-        <th class="right aligned">
-          {{#if torrentsStats}}
-          <div class="ui green basic label">
-            <i class="cloud download icon" title="Total Download"></i>
-            {{humanFileSize torrentsStats.down false}}/s
-          </div>
-          <div class="ui red basic label">
-            <i class="cloud upload icon" title="Total Upload"></i>
-            {{humanFileSize torrentsStats.up false}}/s
-          </div>
+        <th colspan="3">Transfers</th>
+        <th colspan="3" class="right aligned">
+          {{#if torrentsStatistics}}
+            <div class="ui small right floated labels">
+              <div class="ui green label">
+                <i class="cloud download icon" title="Total Download"></i>
+                {{humanFileSize torrentsStatistics.downloadSpeed false}}/s
+              </div>
+              <div class="ui orange label">
+                <i class="cloud upload icon" title="Total Upload"></i>
+                {{humanFileSize torrentsStatistics.uploadSpeed false}}/s
+              </div>
+            </div>
           {{/if}}
         </th>
       </tr>
