@@ -14,7 +14,8 @@ Meteor.startup(() => {
   webTorrentClient.on('ready', () => {
     transfersStopped();
   });
-  webTorrentClient.on('error', () => {
+  webTorrentClient.on('error', (error) => {
+    console.log('client error', error);
     transfersStopped();
   });
 
@@ -38,18 +39,30 @@ Meteor.startup(() => {
     );
   }
 
+  let downloadCounter = 0;
+  let uploadCounter = 0;
+
   webTorrentClient.on('torrent', (torrent) => {
     torrent.on('download', () => {
-      updateTransfer(torrent);
+      downloadCounter += 1;
+      if (downloadCounter > 999) {
+        updateTransfer(torrent);
+        downloadCounter = 0;
+      }
     });
     torrent.on('upload', () => {
+      uploadCounter += 1;
+      if (uploadCounter > 999) {
+        updateTransfer(torrent);
+        uploadCounter = 0;
+      }
       updateTransfer(torrent);
     });
     torrent.on('done', () => {
       updateTransfer(torrent);
     });
-    torrent.on('error', () => {
-      console.error(error);
+    torrent.on('error', (error) => {
+      console.log('torrent error', error);
     });
   });
 
