@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { $ } from 'meteor/jquery';
-import { ReactiveVar } from 'meteor/reactive-var';
 
 import Transfers from '../../../api/transfers/transfers.js';
 import Statistics from '../../../api/statistics/statistics.js';
