@@ -45,14 +45,14 @@ Meteor.startup(() => {
   webTorrentClient.on('torrent', (torrent) => {
     torrent.on('download', () => {
       downloadCounter += 1;
-      if (downloadCounter > 999) {
+      if (downloadCounter > 9999) {
         updateTransfer(torrent);
         downloadCounter = 0;
       }
     });
     torrent.on('upload', () => {
       uploadCounter += 1;
-      if (uploadCounter > 999) {
+      if (uploadCounter > 9999) {
         updateTransfer(torrent);
         uploadCounter = 0;
       }
