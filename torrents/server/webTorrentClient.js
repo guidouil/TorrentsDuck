@@ -16,7 +16,7 @@ Meteor.startup(() => {
   });
   webTorrentClient.on('error', (error) => {
     console.log('client error', error);
-    transfersStopped();
+    // transfersStopped();
   });
 
   async function updateTransfer(torrent) {
@@ -45,14 +45,14 @@ Meteor.startup(() => {
   webTorrentClient.on('torrent', (torrent) => {
     torrent.on('download', () => {
       downloadCounter += 1;
-      if (downloadCounter > 9999) {
+      if (downloadCounter > 99999) {
         updateTransfer(torrent);
         downloadCounter = 0;
       }
     });
     torrent.on('upload', () => {
       uploadCounter += 1;
-      if (uploadCounter > 9999) {
+      if (uploadCounter > 99999) {
         updateTransfer(torrent);
         uploadCounter = 0;
       }

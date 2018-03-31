@@ -32,7 +32,14 @@ Meteor.methods({
       throw new Meteor.Error('403', 'Not authorized');
     }
     check(torrentToStart, Object);
-
+    updateTorrent(torrentToStart._id, { toStart: false });
+    if (torrentToStart.transferId) {
+      // to avoid double torrent start issue
+      const existingTorrent = webTorrentClient.get(torrentToStart.transferId);
+      if (existingTorrent) {
+        return false;
+      }
+    }
     const maxConns = Meteor.settings.torrentMaxConnections;
     const path = Meteor.settings.torrentsPath;
     const { _id, torrentRef, username, userId } = torrentToStart;
@@ -52,7 +59,6 @@ Meteor.methods({
           userId,
         });
         updateTorrent(torrentToStart._id, {
-          toStart: false,
           transferId: torrent.infoHash,
           name: torrent.name,
           startedAt: new Date(),
@@ -69,6 +75,7 @@ Meteor.methods({
     check(torrentToStop, Object);
 
     if (torrentToStop.transferId) {
+      updateTorrent(torrentToStop._id, { toStop: false });
       const torrent = webTorrentClient.get(torrentToStop.transferId);
       if (torrent) {
         webTorrentClient.remove(torrentToStop.transferId);
@@ -79,7 +86,6 @@ Meteor.methods({
         uploadSpeed: 0,
         peers: 0,
       });
-      updateTorrent(torrentToStop._id, { toStop: false });
     }
   },
 
