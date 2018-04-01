@@ -35,3 +35,4 @@ kurounin:pagination-blaze
 simple:json-routes
 zimme:active-route
 percolate:synced-cron
+tap:i18n

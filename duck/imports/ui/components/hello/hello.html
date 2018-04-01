@@ -3,12 +3,12 @@
   <div class="ui basic segment" id="hello">
     {{> logo class='medium centered' quack=true}}
     <h1 class="ui center aligned header">
-      <div class="sub header">WELCOME TO</div>
+      <div class="sub header">{{_ 'welcome'}}</div>
       <em>Torrents Duck</em>
     </h1>
     <h2 class="ui center aligned header">
-      Please <a href="/sign-in">sign in</a> or <a href="/sign-up">sign up</a>,
-      <div class="sub header">also do not click on the duck.</div>
+      {{{_ 'please_sign_in_up'}}}
+      <div class="sub header">{{_ 'no_duck_click'}}</div>
     </h2>
   </div>
 </template>

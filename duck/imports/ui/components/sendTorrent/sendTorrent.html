@@ -3,18 +3,18 @@
   <form class="ui form" id="sendTorrentForm">
     <div class="two fields">
       <div class="field">
-        <label>Send a .torrent file</label>
+        <label>{{_ 'send_a_torrent_file'}}</label>
         <div class="ui left icon input" id="torrentFileClick">
-          <input type="text" placeholder="Select a .torrent file" id="torrentFileInput">
+          <input type="text" placeholder="{{_ 'select_a_torrent_file'}}" id="torrentFileInput">
           <i class="file icon"></i>
         </div>
         <input type="file" id="torrentFile" class="hidden">
       </div>
       <div class="field">
-        <label>Past a magnet or torrent url</label>
+        <label>{{_ 'past_a_magnet_or_torrent_url'}}</label>
         <div class="ui right labeled left icon input" id="torrentUrlClick">
           <i class="linkify icon"></i>
-          <input type="text" placeholder="Only magnet: or http(s)://" id="torrentUrl">
+          <input type="text" placeholder="{{_ 'only_magnet_or_https'}}" id="torrentUrl">
           <div class="ui label">
             GO
           </div>

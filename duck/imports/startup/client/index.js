@@ -2,3 +2,4 @@
 
 import './routes.js';
 import './salertConfig.js';
+import './setLanguage.js';

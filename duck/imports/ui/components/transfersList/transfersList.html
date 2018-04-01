@@ -4,16 +4,16 @@
     <div class="fields">
       <div class="ten wide field">
         <div class="ui icon input">
-          <input type="text" placeholder="Search..." name="search" id="search">
+          <input type="text" placeholder="{{_ 'search'}}" name="search" id="search">
           <i class="search icon"></i>
         </div>
       </div>
       <div class="two wide field desktop-only">
         <select class="ui fluid dropdown" name="sort" id="sort">
-          <option value="progress">Progress</option>
-          <option value="name">Name</option>
-          <option value="downloadSpeed">Speed</option>
-          <option value="timeRemaining">Time</option>
+          <option value="progress">{{_ 'progress'}}</option>
+          <option value="name">{{_ 'name'}}</option>
+          <option value="downloadSpeed">{{_ 'speed'}}</option>
+          <option value="timeRemaining">{{_ 'time'}}</option>
         </select>
       </div>
       <div class="two wide field desktop-only">
@@ -26,7 +26,7 @@
       <div class="two wide field">
         <div class="ui toggle checkbox middleCheckbox">
           <input type="checkbox" name="myTorrent" id="myTorrents">
-          <label>My transfers</label>
+          <label>{{_ 'My transfers'}}</label>
         </div>
       </div>
     </div>
@@ -106,16 +106,16 @@
         </td>
         <td class="right aligned">
           {{#if stopped}}
-          <button class="ui primary compact icon button startTorrent" data-tooltip="Start torrent" data-inverted="" data-position="top right">
+          <button class="ui primary compact icon button startTorrent" data-tooltip="{{_ 'start_transfer'}}" data-inverted="" data-position="top right">
             <i class="play icon"></i>
           </button>
           {{else}}
-            <button class="ui secondary compact icon button stopTorrent" data-tooltip="Stop torrent" data-inverted="" data-position="top right">
+            <button class="ui secondary compact icon button stopTorrent" data-tooltip="{{_ 'stop_transfer'}}" data-inverted="" data-position="top right">
               <i class="stop icon"></i>
             </button>
           {{/if}}
 
-          <button class="ui red compact icon button removeTorrent" data-tooltip="Remove torrent" data-inverted="" data-position="top right">
+          <button class="ui red compact icon button removeTorrent" data-tooltip="{{_ 'remove_transfer'}}" data-inverted="" data-position="top right">
             <i class="remove icon"></i>
           </button>
         </td>
@@ -123,7 +123,7 @@
       {{else}}
       <tr>
         <td class="center aligned" colspan="6">
-          <strong>No transfers found 😕</strong>
+          <strong>{{_ 'no_transfer_found'}}</strong>
         </td>
       </tr>
       {{/each}}

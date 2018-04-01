@@ -15,7 +15,7 @@ Meteor.methods({
     return Torrents.insert({
       torrentRef,
       username: user.username,
-      userId: user.userId,
+      userId: user._id,
       toStart: true,
       createdAt: new Date(),
     });

@@ -5,13 +5,13 @@
         <div class="bar">
           <div class="progress"></div>
         </div>
-        <div class="label">{{humanFileSize diskUsage.available true}} available</div>
+        <div class="label">{{humanFileSize diskUsage.available true}} {{_ 'available'}}</div>
       </div>
     </div>
     <div class="four wide right aligned column">
       <div class="ui labels">
         <div class="ui basic right pointing label">
-          Load average
+          {{_ 'Load_average'}}
         </div>
         {{#each loadAverage}}
         <div class="ui label">
@@ -21,5 +21,7 @@
       </div>
     </div>
   </div>
-  <h4 class="ui center aligned header">FTP is running on port <div class="ui large green label">{{ftpPort}}</div><br>We recommend <a href="https://cyberduck.io/" target="_blanck">Cyberduck</a></h4>
+  <h4 class="ui center aligned header">
+    {{{_ 'ftp_open_on_port' ftpPort= ftpPort}}}
+  </h4>
 </template>

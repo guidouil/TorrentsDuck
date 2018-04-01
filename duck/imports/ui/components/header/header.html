@@ -6,16 +6,21 @@
         <!-- {{> logo src='/img/duck_white.svg' class='mini'}} -->
       </a>
       {{#if isValidOrIsAdmin}}
-        <a class="item {{isActiveRoute 'explorer'}}" title="Files explorer" href="/explorer"><i class="folder open icon"></i></a>
+        <a class="item {{isActiveRoute 'explorer'}}" title="{{_ 'files_explorer'}}" href="/explorer"><i class="folder open icon"></i></a>
       {{/if}}
       {{#if currentUser.isAdmin}}
-        <a class="item {{isActiveRoute 'usersList'}}" title="Users list" href="/users-list"><i class="users icon"></i></a>
+        <a class="item {{isActiveRoute 'usersList'}}" title="{{_ 'users_list'}}" href="/users-list"><i class="users icon"></i></a>
       {{/if}}
       <div class="right menu">
-        {{#if currentUser}}
-          <div class="item" title="Logout" id="logout"><i class="power icon"></i></div>
+        {{#if isFrench}}
+        <a href="?lang=en" class="item" title="English">EN</a>
         {{else}}
-          <a class="item" title="Login" href="/sign-in"><i class="user icon"></i></a>
+        <a href="?lang=fr" class="item" title="Français">FR</a>
+        {{/if}}
+        {{#if currentUser}}
+          <div class="item" title="{{_ 'logout'}}" id="logout"><i class="power icon"></i></div>
+        {{else}}
+          <a class="item" title="{{_ 'login'}}" href="/sign-in"><i class="user icon"></i></a>
         {{/if}}
       </div>
     </div>
@@ -25,20 +30,20 @@
   <div class="ui basic modal" id="logoutModal">
     <div class="ui icon header">
       <i class="red power icon"></i>
-      SIGN OUT
+      {{_ 'SIGN OUT'}}
     </div>
     <div class="content center-this">
-      <p>Do you really want to log out?</p>
+      <p>{{_ 'really_log_out'}}</p>
     </div>
     <div class="actions">
       <div class="center-this">
         <div class="ui red cancel inverted button">
           <i class="remove icon"></i>
-          NO
+          {{_ 'NO'}}
         </div>
         <div class="ui green ok inverted button">
           <i class="checkmark icon"></i>
-          YES
+          {{_ 'YES'}}
         </div>
       </div>
     </div>
