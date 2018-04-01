@@ -3,9 +3,9 @@
     {{#if currentUser}}
       <div class="ui warning message">
         <div class="header">
-          You not validated yet!
+          {{_'not_validated'}}
         </div>
-        An administrator is going to validate your account ASAP. You don't need to refresh the page.
+        {{_ 'please_wait_admin'}}
       </div>
     {{/if}}
     {{> hello}}

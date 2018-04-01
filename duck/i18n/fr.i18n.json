@@ -2,6 +2,8 @@
   "welcome": "BIENVENUE SUR",
   "please_sign_in_up": "Veuillez <a href='/sign-in'>vous connecter</a> ou <a href='/sign-up'>vous inscrire</a>,",
   "no_duck_click": "et merci de na pas cliquer sur le canard.",
+  "not_validated": "Votre compte n'est pas encore validé!",
+  "please_wait_admin": "Un administrateur va bientôt le valider. Pas besoin de recharger la page",
   "files_explorer": "Explorateur de fichiers",
   "users_list": "Liste utilisateurs",
   "logout": "Se déconnecter",
