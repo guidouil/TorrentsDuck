@@ -130,7 +130,7 @@ sudo iptables -t nat -D DOCKER 2
 
 ## 7. Get admin right
 
-This is not a "bug" : **only the first account of the platform gets admin rights** (for now). So you need to create the first user using the `sign-up` from the website we just deployd. Once you have your first account, you need to restart the node application hosted on your server with the following commands :
+This is not a "bug" : **only the first account of the platform gets admin rights** (for now). So you need to create the first user using the `sign-up` from the website we just deployed. Once you have your first account, you need to restart the node application hosted on your server with the following commands :
 
 ```sh
 cd path/to/TorrentsDuck

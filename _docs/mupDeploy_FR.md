@@ -128,7 +128,7 @@ Si vous avez des routes a retirer d'une précédente installation. VOus devez d'
 sudo iptables -t nat -L --line-numbers
 ```
 
-Et ensuite effecer la regle dont vous ne voulez plus par sont numéro de ligne (ici ceteg DOCKER ligne 2)
+Et ensuite effacer la règle dont vous ne voulez plus par sont numéro de ligne (ici catégorie DOCKER, ligne 2)
 
 ```sh
 sudo iptables -t nat -D DOCKER 2
