@@ -6,6 +6,8 @@ import { _ } from 'meteor/underscore';
 
 import './explorer.html';
 
+import '../../components/serverStatus/serverStatus.js';
+
 Template.explorer.onCreated(() => {
   const instance = Template.instance();
   instance.filesList = new ReactiveVar();

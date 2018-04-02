@@ -1,0 +1,8 @@
+<template name="diskUsage">
+  <div class="ui active yellow progress" id="diskUsage">
+    <div class="bar">
+      <div class="progress"></div>
+    </div>
+    <div class="label">{{humanFileSize diskUsage.available true}} {{_ 'available'}}</div>
+  </div>
+</template>

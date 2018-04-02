@@ -1,27 +1,21 @@
 <template name="serverStatus">
-  <div class="ui stackable grid">
-    <div class="twelve wide column">
-      <div class="ui active yellow progress" id="diskUsage">
-        <div class="bar">
-          <div class="progress"></div>
-        </div>
-        <div class="label">{{humanFileSize diskUsage.available true}} {{_ 'available'}}</div>
-      </div>
+  <div class="ui bottom fixed mini inverted borderless menu">
+    <div class="header item">
+      {{{_ 'ftp_open_on_port' ftpPort= ftpPort}}}
     </div>
-    <div class="four wide right aligned column">
-      <div class="ui labels">
-        <div class="ui basic right pointing label">
-          {{_ 'load_average'}}
+    <div class="right menu">
+      <div class="item">
+        <div class="ui small labels">
+          <div class="ui right pointing black label">
+            {{_ 'load_average'}}
+          </div>
+          {{#each loadAverage}}
+            <div class="ui label">
+              {{roundTwo this}}
+            </div>
+          {{/each}}
         </div>
-        {{#each loadAverage}}
-        <div class="ui label">
-          {{roundTwo this}}
-        </div>
-        {{/each}}
       </div>
     </div>
   </div>
-  <h4 class="ui center aligned header">
-    {{{_ 'ftp_open_on_port' ftpPort= ftpPort}}}
-  </h4>
 </template>

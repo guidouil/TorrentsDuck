@@ -18,18 +18,6 @@ Template.serverStatus.helpers({
     }
     return false;
   },
-  diskUsage() {
-    const system = Statistics.findOne({ _id: 'system' });
-    if (system) {
-      const { diskUsage } = system;
-      $('#diskUsage').progress({
-        value: diskUsage.total - diskUsage.available,
-        total: diskUsage.total,
-      });
-      return diskUsage;
-    }
-    return false;
-  },
   ftpPort() {
     return Meteor.settings.public.ftpPort;
   },

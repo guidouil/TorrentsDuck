@@ -47,3 +47,7 @@ Template.registerHelper('makeLink', (path, filename = '') => {
   const shortPath = path.substr(1);
   return `/file/${encodeURIComponent(shortPath + filename)}`;
 });
+
+Template.registerHelper('equals', (a, b) => {
+  return a === b;
+});

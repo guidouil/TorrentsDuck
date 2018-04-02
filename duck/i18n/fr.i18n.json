@@ -18,7 +18,7 @@
   "only_magnet_or_https": "Seulement magnet: ou http(s)://",
   "available": "disponible",
   "load_average": "Charge moy.",
-  "ftp_open_on_port": "Le FTP est ouvert sur le port <div class='ui large green label'>__ftpPort__</div>",
+  "ftp_open_on_port": "Port FTP<div class='ui green label'>__ftpPort__</div>",
   "search": "Recherche...",
   "progress": "Progrès",
   "name": "Nom",
@@ -31,7 +31,7 @@
   "remove_transfer": "Retirer le transfert",
   "no_transfer_found": "Aucun transfert trouvé 😕",
   "parent_directory": "Répertoire parent",
-  "start_message": "Le transfert va commencé dans 10 sec ou moins ⏳",
+  "start_message": "Le transfert va commencer dans 10 sec ou moins ⏳",
   "stop_message": "Le transfert va s'arrêter dans 10 sec ou moins ⏳",
   "remove_message": "Le transfert va être supprimé dans 10 sec ou moins ⏳",
   "wrong_url_message": "L'URL doit commencer par http://, https:// ou magnet: 😱"

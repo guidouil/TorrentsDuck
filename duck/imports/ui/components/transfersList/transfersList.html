@@ -102,6 +102,10 @@
             <i class="clock icon" title="Remaining time"></i>
             {{convertMs timeRemaining}}
           </div>
+          {{else}}
+            {{#if equals progress 1}}
+              <i class="green check icon"></i>
+            {{/if}}
           {{/if}}
         </td>
         <td class="right aligned">
@@ -110,11 +114,10 @@
             <i class="play icon"></i>
           </div>
           {{else}}
-            <div class="ui secondary icon button stopTorrent torrentAction" data-content="{{_ 'stop_transfer'}}" data-position="top right" id="stopTorrent{{_id}}">
+            <div class="ui orange icon button stopTorrent torrentAction" data-content="{{_ 'stop_transfer'}}" data-position="top right" id="stopTorrent{{_id}}">
               <i class="stop icon"></i>
             </div>
           {{/if}}
-
           <div class="ui red icon button removeTorrent torrentAction" data-content="{{_ 'remove_transfer'}}" data-position="top right" id="removeTorrent{{_id}}">
             <i class="remove icon"></i>
           </div>
