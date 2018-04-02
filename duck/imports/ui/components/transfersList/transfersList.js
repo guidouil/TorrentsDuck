@@ -37,6 +37,7 @@ Template.transfersList.helpers({
         total: 1,
         value: torrent.progress,
       });
+      $('.torrentAction').popup();
     }, 100);
   },
   convertMs(ms) {
@@ -68,6 +69,7 @@ Template.transfersList.helpers({
 
 Template.transfersList.events({
   'click .stopTorrent'() {
+    $('.stopTorrent').addClass('loading');
     const torrent = this;
     Meteor.call('stopTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
@@ -77,6 +79,7 @@ Template.transfersList.events({
     });
   },
   'click .startTorrent'() {
+    $('.startTorrent').addClass('loading');
     const torrent = this;
     Meteor.call('startTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
@@ -86,6 +89,7 @@ Template.transfersList.events({
     });
   },
   'click .removeTorrent'() {
+    $('.removeTorrent').addClass('loading');
     const torrent = this;
     Meteor.call('removeTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);

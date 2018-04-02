@@ -40,10 +40,10 @@ Meteor.methods({
         return false;
       }
     }
-    const maxConns = Meteor.settings.torrentMaxConnections;
+    const maxWebConns = Meteor.settings.torrentMaxConnections;
     const path = Meteor.settings.torrentsPath;
     const { _id, torrentRef, username, userId } = torrentToStart;
-    webTorrentClient.add(torrentRef, { maxConns, path }, (torrent) => {
+    webTorrentClient.add(torrentRef, { maxWebConns, path }, (torrent) => {
       if (torrent.ready) {
         upsertTransfer(torrent.infoHash, {
           name: torrent.name,

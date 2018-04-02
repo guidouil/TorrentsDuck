@@ -5,7 +5,8 @@ import { _ } from 'meteor/underscore';
 import Transfers from './collections/transfers.js';
 
 Meteor.startup(() => {
-  const webTorrentClient = new WebTorrent();
+  const maxConns = Meteor.settings.torrentMaxConnections;
+  const webTorrentClient = new WebTorrent({ maxConns });
 
   // on startup all transfers should be mark as stopped
   async function transfersStopped() {
@@ -37,24 +38,22 @@ Meteor.startup(() => {
     );
   }
 
-  let downloadCounter = 0;
-  let uploadCounter = 0;
+  const interval = 1000;
+  let downloadInTheFutur = Date.now() + interval;
+  let uploadInTheFutur = Date.now() + interval;
 
   webTorrentClient.on('torrent', (torrent) => {
     torrent.on('download', () => {
-      downloadCounter += 1;
-      if (downloadCounter > 99999) {
+      if (Date.now() > downloadInTheFutur) {
         updateTransfer(torrent);
-        downloadCounter = 0;
+        downloadInTheFutur = Date.now() + interval;
       }
     });
     torrent.on('upload', () => {
-      uploadCounter += 1;
-      if (uploadCounter > 99999) {
+      if (Date.now() > uploadInTheFutur) {
         updateTransfer(torrent);
-        uploadCounter = 0;
+        uploadInTheFutur = Date.now() + interval;
       }
-      updateTransfer(torrent);
     });
     torrent.on('done', () => {
       updateTransfer(torrent);
