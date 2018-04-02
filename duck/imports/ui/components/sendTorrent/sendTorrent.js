@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { $ } from 'meteor/jquery';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import TorrentFiles from '../../../api/torrentFiles/torrentFiles.js';
 import './sendTorrent.html';
@@ -30,7 +31,7 @@ Template.sendTorrent.events({
           Meteor.call('addTorrent', fileObj.path, (transferError, success) => {
             if (transferError) sAlert.error(transferError);
             if (success) {
-              sAlert.success('The torrent will start in 10 sec or less ⏳');
+              sAlert.success(TAPi18n.__('start_message'));
             }
           });
         }
@@ -43,14 +44,14 @@ Template.sendTorrent.events({
     const torrentUrl = event.currentTarget.value;
     if (torrentUrl) {
       if (!torrentUrl.startsWith('magnet:') && !torrentUrl.startsWith('http://') && !torrentUrl.startsWith('https://')) {
-        sAlert.error('URL must start with http:, https: or magnet: 😱');
+        sAlert.error(TAPi18n.__('wrong_url_message'));
         return false;
       }
       Meteor.call('addTorrent', torrentUrl, (transferError, success) => {
         document.getElementById('sendTorrentForm').reset();
         if (transferError) sAlert.error(transferError);
         if (success) {
-          sAlert.success('The torrent will start in 10 sec or less ⏳');
+          sAlert.success(TAPi18n.__('start_message'));
         }
       });
       return true;

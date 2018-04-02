@@ -8,13 +8,13 @@
   "users_list": "Liste utilisateurs",
   "logout": "Se déconnecter",
   "login": "Se connecter",
-  "SIGN_OUT": "DECONECTION",
+  "SIGN_OUT": "DECONNECTION",
   "really_log_out": "Voulez vous vraiment vous déconnecter ?",
   "NO": "NON",
   "YES": "OUI",
   "send_a_torrent_file": "Envoyer un fichier .torrent",
   "select_a_torrent_file": "Selectionner un fichier .torrent",
-  "past_a_magnet_or_torrent_url": "Coller un lien magnet ou lien vers un aimant",
+  "past_a_magnet_or_torrent_url": "Coller un lien magnet ou lien vers un torrent",
   "only_magnet_or_https": "Seulement magnet: ou http(s)://",
   "available": "disponible",
   "load_average": "Charge moy.",
@@ -30,5 +30,9 @@
   "stop_transfer": "Arreter le transfert",
   "remove_transfer": "Retirer le transfert",
   "no_transfer_found": "Aucun transfert trouvé 😕",
-  "parent_directory": "Répertoire parent"
+  "parent_directory": "Répertoire parent",
+  "start_message": "Le transfert va commencé dans 10 sec ou moins ⏳",
+  "stop_message": "Le transfert va s'arrêter dans 10 sec ou moins ⏳",
+  "remove_message": "Le transfert va être supprimé dans 10 sec ou moins ⏳",
+  "wrong_url_message": "L'URL doit commencer par http://, https:// ou magnet: 😱"
 }

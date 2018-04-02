@@ -30,5 +30,9 @@
   "stop_transfer": "Stop transfer",
   "remove_transfer": "Remove transfer",
   "no_transfer_found": "No transfers found 😕",
-  "parent_directory": "Parent directory"
+  "parent_directory": "Parent directory",
+  "start_message": "The transfer will start in 10 sec or less ⏳",
+  "stop_message": "The transfer will start in 10 sec or less ⏳",
+  "remove_message": "The transfer will be removed in 10 sec or less ⏳",
+  "wrong_url_message": "URL must start with http://, https:// or magnet: 😱"
 }

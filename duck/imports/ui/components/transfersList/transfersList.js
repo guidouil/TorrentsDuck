@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { $ } from 'meteor/jquery';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 import Transfers from '../../../api/transfers/transfers.js';
 import Statistics from '../../../api/statistics/statistics.js';
@@ -69,32 +70,32 @@ Template.transfersList.helpers({
 
 Template.transfersList.events({
   'click .stopTorrent'() {
-    $('.stopTorrent').addClass('loading');
+    $(`#stopTorrent${this._id}`).addClass('loading');
     const torrent = this;
     Meteor.call('stopTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.info('The torrent will stop in 10 sec or less ⏳');
+        sAlert.info(TAPi18n.__('stop_message'));
       }
     });
   },
   'click .startTorrent'() {
-    $('.startTorrent').addClass('loading');
+    $(`#startTorrent${this._id}`).addClass('loading');
     const torrent = this;
     Meteor.call('startTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success('The torrent will start in 10 sec or less ⏳');
+        sAlert.success(TAPi18n.__('start_message'));
       }
     });
   },
   'click .removeTorrent'() {
-    $('.removeTorrent').addClass('loading');
+    $(`#removeTorrent${this._id}`).addClass('loading');
     const torrent = this;
     Meteor.call('removeTorrent', torrent.torrentId, (error, success) => {
       if (error) sAlert.error(error);
       if (success) {
-        sAlert.success('The torrent will be removed in 10 sec or less ⏳');
+        sAlert.success(TAPi18n.__('remove_message'));
       }
     });
   },

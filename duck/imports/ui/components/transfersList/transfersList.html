@@ -106,16 +106,16 @@
         </td>
         <td class="right aligned">
           {{#if stopped}}
-          <div class="ui primary icon button startTorrent torrentAction" data-content="{{_ 'start_transfer'}}" data-position="top right">
+          <div class="ui primary icon button startTorrent torrentAction" data-content="{{_ 'start_transfer'}}" data-position="top right" id="startTorrent{{_id}}">
             <i class="play icon"></i>
           </div>
           {{else}}
-            <div class="ui secondary icon button stopTorrent torrentAction" data-content="{{_ 'stop_transfer'}}" data-position="top right">
+            <div class="ui secondary icon button stopTorrent torrentAction" data-content="{{_ 'stop_transfer'}}" data-position="top right" id="stopTorrent{{_id}}">
               <i class="stop icon"></i>
             </div>
           {{/if}}
 
-          <div class="ui red icon button removeTorrent torrentAction" data-content="{{_ 'remove_transfer'}}" data-position="top right">
+          <div class="ui red icon button removeTorrent torrentAction" data-content="{{_ 'remove_transfer'}}" data-position="top right" id="removeTorrent{{_id}}">
             <i class="remove icon"></i>
           </div>
         </td>
