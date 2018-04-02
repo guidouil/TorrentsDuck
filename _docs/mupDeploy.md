@@ -24,6 +24,7 @@ You must have the following tools installed on your PC (not on the server)
 # Deployement in 7 steps
 
 ## 1. Get the source code
+
 Open your favorite terminal and go into the directory which you want to store `Torrents Duck` source code and type the following command. This directory is referenced as `path/to/TorrentsDuck` later on.
 
 ```sh
@@ -32,14 +33,18 @@ git clone https://github.com/guidouil/TorrentsDuck.git
 
 ## 2. Setting up Meteor Up for your server *(this is the hardest part)*
 
-Now that you have all dependencies and the source code, we are going to setup Meteor Up to inject the seedbox to your server. TorrentsDuck is cutted in 3 containers (duck, torrents and ftp) to be more reliable and use more CPU threads. Go in source code folder on your local machine and copy your `mup` deployement scripts with the following commands (Don't be scared your `.deploy` folder is already mentioned in the `.gitignore`):
+Now that you have all dependencies and the source code, we are going to setup Meteor Up to inject the seedbox to your server. `Torrents Duck` is cutted in 3 containers (`duck`, `torrents` and `ftp`) to be more reliable and use more CPU threads.
+
+Go in source code folder on your local machine and copy your `mup` deployement scripts with the following commands (Don't be scared your `.deploy` folder is already mentioned in the `.gitignore`):
 
 ```sh
 cd path/to/TorrentsDuck
 cp .deploy-dist .deploy
 ```
 
-Now you have to edit the server informations presents in the `.deploy/duck/mup.js`, `.deploy/torrents/mup.js` and `.deploy/ftp/mup.js`  files. You have to change all iterations of the following words with what is appropriate for your server:
+Now you have to edit the server informations presents in the `.deploy/duck/mup.js`, `.deploy/torrents/mup.js` and `.deploy/ftp/mup.js`  files.
+
+You have to change all iterations of the following words with what is appropriate for your server:
 
 * MY.SERVER.IP.ADDRESS
 * MY_SERVER_SUDOER_USERNAME
@@ -81,7 +86,9 @@ mup setup
 mup deploy
 ```
 
-Now the web interface, bittorent and the ftp are ready but we're still can't connect to the FTP. Check containers status with `mup docker ps`
+Check containers status with `mup docker ps`
+
+Now the web interface, bittorent and the ftp are ready but we're still can't connect to the FTP.
 
 ## 6. Open the ports for FTP passive mode with iptable
 
