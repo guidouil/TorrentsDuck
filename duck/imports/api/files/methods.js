@@ -30,6 +30,7 @@ Meteor.methods({
         const niceFile = {
           name: rawName,
           size: rawStat.size,
+          date: rawStat.mtime,
           isDirectory: rawStat.isDirectory(),
           isFile: rawStat.isFile(),
         };

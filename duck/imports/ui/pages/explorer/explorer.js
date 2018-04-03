@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { _ } from 'meteor/underscore';
+import { $ } from 'meteor/jquery';
 
 import './explorer.html';
 
@@ -18,6 +19,7 @@ Template.explorer.onCreated(() => {
 
 Template.explorer.onRendered(() => {
   const instance = Template.instance();
+  $('.dropdown').dropdown();
   instance.autorun(() => {
     const currentPath = instance.currentPath.get();
     Meteor.call('listFiles', currentPath, (error, filesList) => {
@@ -72,5 +74,15 @@ Template.explorer.events({
       file.name.toLowerCase().includes(query.toLowerCase()));
     templateInstance.filesList.set(filesList);
     return true;
+  },
+  'change #sort'(event, templateInstance) {
+    if (event.target.value) {
+      const filesListSource = templateInstance.filesListSource.get();
+      const sortedFilesList = _.sortBy(filesListSource, event.target.value);
+      if (event.target.value !== 'name') {
+        sortedFilesList.reverse();
+      }
+      templateInstance.filesList.set(sortedFilesList);
+    }
   },
 });

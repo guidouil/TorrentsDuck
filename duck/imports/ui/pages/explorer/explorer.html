@@ -1,9 +1,22 @@
 <template name="explorer">
   <div class="ui basic segment">
-    <div class="ui fluid icon input" id="searchFile">
-      <input type="text" placeholder="Search...">
-      <i class="search icon"></i>
-    </div>
+    <form class="ui form">
+      <div class="fields">
+        <div class="fourteen wide field">
+          <div class="ui fluid icon input" id="searchFile">
+            <input type="text" placeholder="Search...">
+            <i class="search icon"></i>
+          </div>
+        </div>
+        <div class="two wide field">
+          <select class="ui fluid dropdown" name="sort" id="sort">
+            <option value="name">{{_ 'name'}}</option>
+            <option value="date">{{_ 'date'}}</option>
+            <option value="size">{{_ 'size'}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
     <div class="ui horizontal divider"></div>
     <div class="ui link celled relaxed selection list">
       {{#unless isRootDirectory}}
@@ -27,7 +40,7 @@
         {{/if}}
         {{#if isFile}}
           <a class="item" href="{{makeLink currentPath name}}" target="_blank">
-            <div class="right floated content"><em>{{humanFileSize size}}</em></div>
+            <div class="right floated content"><em>{{shortDate date}} — {{humanFileSize size}}</em></div>
             <i class="blue file outline icon"></i>
             <div class="content">
               <div class="header">
