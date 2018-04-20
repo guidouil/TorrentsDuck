@@ -3,6 +3,7 @@
 A multi users bittorrents clients that quacks
 
 ⚠️ *Currently in alpha stage* ⚠️
+![alt text](https://raw.githubusercontent.com/guidouil/TorrentsDuck/master/_docs/torrentsduckmainscreen.png "Torrents Duck main screen")
 
 ## Getting Started
 
