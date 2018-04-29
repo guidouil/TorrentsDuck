@@ -7,7 +7,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.36",
     "meteor-node-stubs": "^0.3.2",
-    "webtorrent": "^0.98.24"
+    "webtorrent": "^0.99.3"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
