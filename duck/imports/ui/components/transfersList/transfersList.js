@@ -35,8 +35,9 @@ Template.transfersList.helpers({
     const torrent = this;
     setTimeout(() => {
       $(`#progress${torrent._id}`).progress({
-        total: 1,
         value: torrent.progress,
+        total: 1,
+        showActivity: false,
       });
       $('.torrentAction').popup();
     }, 100);

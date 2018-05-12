@@ -18,7 +18,7 @@
   "only_magnet_or_https": "Seulement magnet: ou http(s)://",
   "available": "disponible",
   "load_average": "Charge moy.",
-  "ftp_open_on_port": "Port FTP<div class='ui green small label'>__ftpPort__</div>",
+  "ftp_open_on_port": "<div class='ui small labels'><div class='ui right pointing label'>FTP sur le port </div><div class='ui green label'>__ftpPort__</div></div>",
   "search": "Recherche...",
   "progress": "Progrès",
   "name": "Nom",

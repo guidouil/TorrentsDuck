@@ -18,6 +18,7 @@ Template.diskUsage.helpers({
       $('#diskUsage').progress({
         value: diskUsage.total - diskUsage.available,
         total: diskUsage.total,
+        showActivity: false,
       });
       return diskUsage;
     }

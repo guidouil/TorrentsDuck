@@ -11,7 +11,7 @@
     "@babel/runtime": "^7.0.0-beta.46",
     "bcrypt": "^2.0.1",
     "diskusage": "^0.2.4",
-    "meteor-node-stubs": "^0.3.2"
+    "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
@@ -23,8 +23,8 @@
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-meteor": "^4.2.1",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-meteor": "^5.0.0",
+    "eslint-plugin-react": "^7.8.1"
   },
   "postcss": {
     "plugins": {
