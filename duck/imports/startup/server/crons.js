@@ -11,7 +11,7 @@ SyncedCron.config({
 SyncedCron.add({
   name: 'Give duck statistics',
   schedule(parser) {
-    return parser.text('every 30 sec');
+    return parser.text('every 10 sec');
   },
   job() {
     Meteor.call('giveStatistics');
