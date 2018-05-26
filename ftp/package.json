@@ -5,8 +5,8 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.47",
-    "ftp-srv": "^2.18.0",
+    "@babel/runtime": "^7.0.0-beta.49",
+    "ftp-srv": "^2.19.0",
     "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
