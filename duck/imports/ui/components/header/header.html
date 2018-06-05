@@ -6,10 +6,11 @@
         <!-- {{> logo src='/img/duck_white.svg' class='mini'}} -->
       </a>
       {{#if isValidOrIsAdmin}}
-        <a class="item {{isActiveRoute 'explorer'}}" title="{{_ 'files_explorer'}}" href="/explorer"><i class="folder open icon"></i></a>
+        <a class="item {{isActiveRoute 'explorer'}}" title="{{_ 'files_explorer'}}" href="/explorer"><i class="large folder open icon"></i></a>
       {{/if}}
+      <a class="item" title="{{_ 'thanks'}}" href="https://paypal.me/cmapage" target="_blanck"><i class="large beer icon"></i></a>
       {{#if currentUser.isAdmin}}
-        <a class="item {{isActiveRoute 'usersList'}}" title="{{_ 'users_list'}}" href="/users-list"><i class="users icon"></i></a>
+        <a class="item {{isActiveRoute 'usersList'}}" title="{{_ 'users_list'}}" href="/users-list"><i class="large users icon"></i></a>
       {{/if}}
       <div class="right menu">
         {{#if isFrench}}
@@ -18,9 +19,9 @@
         <a href="?lang=fr" class="item" title="Français">FR</a>
         {{/if}}
         {{#if currentUser}}
-          <div class="item" title="{{_ 'logout'}}" id="logout"><i class="power icon"></i></div>
+          <div class="item" title="{{_ 'logout'}}" id="logout"><i class="large power icon"></i></div>
         {{else}}
-          <a class="item" title="{{_ 'login'}}" href="/sign-in"><i class="user icon"></i></a>
+          <a class="item" title="{{_ 'login'}}" href="/sign-in"><i class="large user icon"></i></a>
         {{/if}}
       </div>
     </div>
