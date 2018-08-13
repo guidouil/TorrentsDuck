@@ -7,6 +7,12 @@
     "lint": "eslint .",
     "pretest": "npm run lint --silent"
   },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    }
+  },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.55",
     "bcrypt": "^3.0.0",
