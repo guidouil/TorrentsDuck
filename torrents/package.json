@@ -7,11 +7,11 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.55",
     "meteor-node-stubs": "^0.4.1",
-    "webtorrent": "^0.102.1"
+    "webtorrent": "^0.102.4"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-import-resolver-meteor": "^0.4.0",
