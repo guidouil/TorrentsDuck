@@ -5,20 +5,20 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.55",
+    "@babel/runtime": "^7.3.1",
     "meteor-node-stubs": "^0.4.1",
-    "webtorrent": "^0.102.4"
+    "webtorrent": "^0.103.0"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^17.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-meteor": "^5.0.0",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-meteor": "^5.1.0",
+    "eslint-plugin-react": "^7.12.4"
   },
   "eslintConfig": {
     "extends": "@meteorjs/eslint-config-meteor"
