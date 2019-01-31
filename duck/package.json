@@ -14,23 +14,23 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.55",
-    "bcrypt": "^3.0.0",
-    "diskusage": "^0.2.4",
+    "@babel/runtime": "^7.3.1",
+    "bcrypt": "^3.0.3",
+    "diskusage": "^1.0.0",
     "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
-    "autoprefixer": "^9.1.1",
-    "babel-eslint": "^9.0.0",
-    "chai": "^4.1.2",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^17.0.0",
+    "autoprefixer": "^9.4.7",
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.2.0",
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-meteor": "^5.0.0",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-meteor": "^5.1.0",
+    "eslint-plugin-react": "^7.12.4"
   },
   "postcss": {
     "plugins": {
