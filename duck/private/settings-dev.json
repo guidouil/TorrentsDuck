@@ -3,7 +3,8 @@
   "torrentsPath": "/data/torrents/",
   "uploadsPath": "/data/uploads/",
   "serverIp": "127.0.0.1",
-  "ftpPasvRange": "8000-9000",
+  "ftpPasvMin": "8000",
+  "ftpPasvMax": "9000",
   "public": {
     "ftpPort": "9876"
   }

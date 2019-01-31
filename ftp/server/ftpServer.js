@@ -3,12 +3,11 @@ import { Accounts } from 'meteor/accounts-base';
 import FtpSrv from 'ftp-srv';
 
 Meteor.startup(() => {
-  let ftpAddress = `ftp://0.0.0.0:${Meteor.settings.public.ftpPort}`;
-  if (Meteor.isDevelopment) {
-    ftpAddress = `ftp://127.0.0.1:${Meteor.settings.public.ftpPort}`;
-  }
-  const ftpServer = new FtpSrv(ftpAddress, {
-    pasv_range: Meteor.settings.ftpPasvRange,
+
+  const ftpServer = new FtpSrv({
+    url: `ftp://0.0.0.0:${Meteor.settings.public.ftpPort}`,
+    pasv_min: Meteor.settings.ftpPasvMin,
+    pasv_max: Meteor.settings.ftpPasvMax,
     greeting: 'Welcome to Torrents Duck FTP server',
   });
 
