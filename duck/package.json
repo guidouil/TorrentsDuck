@@ -14,20 +14,20 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.0",
-    "bcrypt": "^3.0.5",
+    "@babel/runtime": "^7.4.3",
+    "bcrypt": "^3.0.6",
     "diskusage": "^1.0.0",
     "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
-    "autoprefixer": "^9.5.0",
+    "autoprefixer": "^9.5.1",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
-    "eslint": "^5.15.3",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.17.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-meteor": "^5.1.0",
     "eslint-plugin-react": "^7.12.4"
