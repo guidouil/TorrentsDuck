@@ -14,9 +14,9 @@
     }
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.3",
+    "@babel/runtime": "^7.4.5",
     "bcrypt": "^3.0.6",
-    "diskusage": "^1.0.0",
+    "diskusage": "^1.1.1",
     "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
@@ -27,10 +27,10 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
-    "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-meteor": "^5.1.0",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.13.0"
   },
   "postcss": {
     "plugins": {

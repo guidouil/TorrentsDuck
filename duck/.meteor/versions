@@ -1,4 +1,4 @@
-accounts-base@1.4.3
+accounts-base@1.4.4
 accounts-password@1.5.1
 aldeed:simple-schema@1.5.4
 allow-deny@1.1.0
@@ -73,6 +73,7 @@ mongo@1.6.2
 mongo-decimal@0.1.1
 mongo-dev-server@1.1.0
 mongo-id@1.0.7
+mquandalle:ismobile@0.1.0
 npm-bcrypt@0.9.3
 npm-mongo@3.1.2
 observe-sequence@1.0.16

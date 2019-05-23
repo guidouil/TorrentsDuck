@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
@@ -59,7 +60,7 @@ Template.transfersList.helpers({
     return `${d}d ${h}h ${m}m ${s}s`;
   },
   truncate(name, size) {
-    if (name && name.length > size) {
+    if (Meteor.isMobile && name && name.length > size) {
       return `${name.substring(0, size)}…`;
     }
     return name;
@@ -112,9 +113,9 @@ Template.transfersList.events({
   'input #search'(event, templateInstance) {
     const filters = templateInstance.transfersPagination.filters();
     if (event.target.value) {
-      filters['$or'] = [
-        { name: { $regex: event.target.value, '$options': 'i' } },
-        { tags: { $regex: event.target.value, '$options': 'i' } },
+      filters.$or = [
+        { name: { $regex: event.target.value, $options: 'i' } },
+        { tags: { $regex: event.target.value, $options: 'i' } },
       ];
     } else if (filters.$or) {
       delete filters.$or;
