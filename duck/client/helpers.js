@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
+import { Conf } from '/imports/api/conf/conf';
+
 Template.registerHelper('isValidOrIsAdmin', () => {
   const user = Meteor.user();
   if (user) {
@@ -13,7 +15,7 @@ Template.registerHelper('shortDate', (d) => {
   if (!d) {
     return '';
   }
-  const pad = (s) => { return (s < 10) ? `0${s}` : s; };
+  const pad = (s) => (s < 10 ? `0${s}` : s);
   return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
 });
 
@@ -44,10 +46,18 @@ Template.registerHelper('roundTwo', (num) => {
 });
 
 Template.registerHelper('makeLink', (path, filename = '') => {
-  const shortPath = path.substr(1);
+  const shortPath = path.substr(1); // remove first slash
   return `/file/${encodeURIComponent(shortPath + filename)}`;
 });
 
 Template.registerHelper('equals', (a, b) => {
   return a === b;
+});
+
+Template.registerHelper('isDark', (color) => {
+  const conf = Conf.findOne({ _id: 'me' });
+  if (conf && conf.darkMode === true) {
+    return 'inverted' || color;
+  }
+  return '';
 });

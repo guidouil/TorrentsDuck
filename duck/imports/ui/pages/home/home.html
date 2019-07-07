@@ -1,23 +1,23 @@
 <template name="home">
   {{#unless isValidOrIsAdmin}}
-    {{#if currentUser}}
-      <div class="ui warning message">
-        <div class="header">
-          {{_'not_validated'}}
-        </div>
-        {{_ 'please_wait_admin'}}
-      </div>
-    {{/if}}
-    {{> hello}}
-  {{else}}
-    <div class="ui basic segment">
-      {{> sendTorrent}}
-      <div class="ui horizontal divider">
-        <i class="yellow arrow down icon"></i>
-      </div>
-      {{> diskUsage}}
-      {{> transfersList}}
+  {{#if currentUser}}
+  <div class="ui warning {{ isDark }} message">
+    <div class="header">
+      {{_'not_validated'}}
     </div>
-    {{> serverStatus}}
+    {{_ 'please_wait_admin'}}
+  </div>
+  {{/if}}
+  {{> hello}}
+  {{else}}
+  <div class="ui {{ isDark }} basic segment">
+    {{> sendTorrent}}
+    <div class="ui horizontal divider">
+      <i class="yellow arrow down icon"></i>
+    </div>
+    {{> diskUsage}}
+    {{> transfersList}}
+  </div>
+  {{> serverStatus}}
   {{/unless}}
 </template>

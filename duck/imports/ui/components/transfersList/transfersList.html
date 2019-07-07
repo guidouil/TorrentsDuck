@@ -1,10 +1,9 @@
 <template name="transfersList">
-
-  <form class="ui form">
+  <form class="ui {{ isDark }} form">
     <div class="fields">
       <div class="ten wide field">
         <div class="ui icon input">
-          <input type="text" placeholder="{{_ 'search'}}" name="search" id="search">
+          <input type="text" placeholder="{{_ 'search'}}" name="search" id="search" />
           <i class="search icon"></i>
         </div>
       </div>
@@ -18,38 +17,38 @@
       </div>
       <div class="two wide field desktop-only">
         <select class="ui fluid dropdown" name="perPage" id="perPage">
-          <option value=50>50</option>
-          <option value=100>100</option>
-          <option value=200>200</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
         </select>
       </div>
       <div class="two wide field">
         <div class="ui toggle checkbox middleCheckbox">
-          <input type="checkbox" name="myTorrent" id="myTorrents">
+          <input type="checkbox" name="myTorrent" id="myTorrents" />
           <label>{{_ 'my_transfers'}}</label>
         </div>
       </div>
     </div>
   </form>
 
-  <div class="ui horizontal divider"></div>
+  <div class="ui horizontal {{ isDark }} divider"></div>
 
-  <table class="ui single line selectable yellow table">
+  <table class="ui single line selectable {{ isDark }} table">
     <thead>
       <tr>
         <th colspan="3">{{_ 'transfers'}}</th>
         <th colspan="3" class="right aligned">
           {{#if torrentsStatistics}}
-            <div class="ui small right floated labels">
-              <div class="ui green label">
-                <i class="cloud download icon" title="Total Download"></i>
-                {{humanFileSize torrentsStatistics.downloadSpeed false}}/s
-              </div>
-              <div class="ui orange label">
-                <i class="cloud upload icon" title="Total Upload"></i>
-                {{humanFileSize torrentsStatistics.uploadSpeed false}}/s
-              </div>
+          <div class="ui small right floated labels">
+            <div class="ui green label">
+              <i class="cloud download icon" title="Total Download"></i>
+              {{humanFileSize torrentsStatistics.downloadSpeed false}}/s
             </div>
+            <div class="ui orange label">
+              <i class="cloud upload icon" title="Total Upload"></i>
+              {{humanFileSize torrentsStatistics.uploadSpeed false}}/s
+            </div>
+          </div>
           {{/if}}
         </th>
       </tr>
@@ -62,19 +61,19 @@
         </td>
         <td>
           {{#if stopped}}
-            <i class="red circle icon"></i>
+          <i class="red circle icon"></i>
           {{else}}
-            <i class="green circle icon"></i>
+          <i class="green circle icon"></i>
           {{/if}}
           {{humanFileSize size true}}
         </td>
         <td class="two wide center aligned">
-          <div class="ui yellow progress torrentProgress" id="progress{{_id}}">
+          <div class="ui yellow progress torrentProgress" id="progress{{ _id }}">
             <div class="bar">
               <div class="progress"></div>
             </div>
           </div>
-          {{initProgress}}
+          {{ initProgress }}
         </td>
         <td class="center aligned">
           <div class="ui small labels">
@@ -92,7 +91,7 @@
             </div>
             <div class="ui label">
               <i class="users icon" title="Peers"></i>
-              {{numPeers}}
+              {{ numPeers }}
             </div>
           </div>
         </td>
@@ -103,22 +102,37 @@
             {{convertMs timeRemaining}}
           </div>
           {{else}}
-            {{#if equals progress 1}}
-              <i class="green check icon"></i>
-            {{/if}}
+          {{#if equals progress 1}}
+          <i class="green check icon"></i>
+          {{/if}}
           {{/if}}
         </td>
         <td class="right aligned">
           {{#if stopped}}
-          <div class="ui primary icon button startTorrent torrentAction" data-content="{{_ 'start_transfer'}}" data-position="top right" id="startTorrent{{_id}}">
+          <div
+            class="ui primary icon button startTorrent torrentAction"
+            data-content="{{_ 'start_transfer'}}"
+            data-position="top right"
+            id="startTorrent{{ _id }}"
+          >
             <i class="play icon"></i>
           </div>
           {{else}}
-            <div class="ui orange icon button stopTorrent torrentAction" data-content="{{_ 'stop_transfer'}}" data-position="top right" id="stopTorrent{{_id}}">
-              <i class="stop icon"></i>
-            </div>
+          <div
+            class="ui orange icon button stopTorrent torrentAction"
+            data-content="{{_ 'stop_transfer'}}"
+            data-position="top right"
+            id="stopTorrent{{ _id }}"
+          >
+            <i class="stop icon"></i>
+          </div>
           {{/if}}
-          <div class="ui red icon button removeTorrent torrentAction" data-content="{{_ 'remove_transfer'}}" data-position="top right" id="removeTorrent{{_id}}">
+          <div
+            class="ui red icon button removeTorrent torrentAction"
+            data-content="{{_ 'remove_transfer'}}"
+            data-position="top right"
+            id="removeTorrent{{ _id }}"
+          >
             <i class="remove icon"></i>
           </div>
         </td>
