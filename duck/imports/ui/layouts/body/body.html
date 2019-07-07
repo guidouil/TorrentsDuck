@@ -1,7 +1,9 @@
 <template name="appBody">
   {{> header}}
-  <div id="mainContainer">
-    {{> Template.dynamic template=main}}
+  <div class="Site {{ isDark }}">
+    <div class="mainContainer">
+      {{> Template.dynamic template=main}}
+    </div>
   </div>
-   {{> sAlert}}
+  {{> sAlert}}
 </template>

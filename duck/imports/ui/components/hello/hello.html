@@ -1,12 +1,12 @@
 <template name="hello">
-  <div class="ui horrizontal separator"></div>
-  <div class="ui basic segment" id="hello">
+  <div class="ui horrizontal {{ isDark }} separator"></div>
+  <div class="ui basic {{ isDark }} segment" id="hello">
     {{> logo class='medium centered' quack=true}}
-    <h1 class="ui center aligned header">
+    <h1 class="ui center aligned {{ isDark }} header">
       <div class="sub header">{{_ 'welcome'}}</div>
       <em>Torrents Duck</em>
     </h1>
-    <h2 class="ui center aligned header">
+    <h2 class="ui center aligned {{ isDark }} header">
       {{{_ 'please_sign_in_up'}}}
       <div class="sub header">{{_ 'no_duck_click'}}</div>
     </h2>

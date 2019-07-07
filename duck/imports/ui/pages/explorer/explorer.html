@@ -1,10 +1,10 @@
 <template name="explorer">
-  <div class="ui basic segment">
+  <div class="ui basic {{ isDark }} segment">
     <form class="ui form">
       <div class="fields">
         <div class="fourteen wide field">
           <div class="ui fluid icon input" id="searchFile">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Search..." />
             <i class="search icon"></i>
           </div>
         </div>
@@ -20,36 +20,40 @@
     <div class="ui horizontal divider"></div>
     <div class="ui link celled relaxed selection list">
       {{#unless isRootDirectory}}
-        <a class="item goParentDirectory">
-          <i class="chevron left icon"></i>
-          <div class="content">
-            {{_'parent_directory'}}
-          </div>
-        </a>
+      <a class="item goParentDirectory">
+        <i class="chevron left icon"></i>
+        <div class="content">
+          {{_'parent_directory'}}
+        </div>
+      </a>
       {{/unless}}
       {{#each filesList}}
-        {{#if isDirectory}}
-          <a class="item changePath">
-            <i class="yellow folder icon"></i>
-            <div class="content">
-              <div class="header">
-                {{name}}
-              </div>
-            </div>
-            <div class="right floated content"><em>{{shortDate date}}</em></div>
-          </a>
-        {{/if}}
-        {{#if isFile}}
-          <a class="item" href="{{makeLink currentPath name}}" target="_blank">
-            <i class="blue file outline icon"></i>
-            <div class="content">
-              <div class="header">
-                {{name}}
-              </div>
-            </div>
-            <div class="right floated content"><em>{{shortDate date}} — {{humanFileSize size}}</em></div>
-          </a>
-          {{/if}}
+      {{#if isDirectory}}
+      <a class="item changePath">
+        <i class="yellow folder icon"></i>
+        <div class="content">
+          <div class="header">
+            {{ name }}
+          </div>
+        </div>
+        <div class="right floated content">
+          <em>{{shortDate date}}</em>
+        </div>
+      </a>
+      {{/if}}
+      {{#if isFile}}
+      <a class="item" href="{{makeLink currentPath name}}" target="_blank">
+        <i class="blue file outline icon"></i>
+        <div class="content">
+          <div class="header">
+            {{ name }}
+          </div>
+        </div>
+        <div class="right floated content">
+          <em>{{shortDate date}} — {{humanFileSize size}}</em>
+        </div>
+      </a>
+      {{/if}}
       {{/each}}
     </div>
     <div class="ui horizontal divider"></div>

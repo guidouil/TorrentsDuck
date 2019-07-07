@@ -1,6 +1,6 @@
 <template name="usersList">
-  <div class="ui basic segment">
-    <table class="ui compact yellow selectable table">
+  <div class="ui basic {{ isDark }} segment">
+    <table class="ui compact selectable {{ isDark }} table">
       <thead>
         <tr>
           <th>Username</th>
@@ -13,7 +13,7 @@
       <tbody>
         {{#each users}}
         <tr>
-          <td>{{username}}</td>
+          <td>{{ username }}</td>
           <td>
             {{emails.[0].address}}
           </td>
@@ -22,10 +22,10 @@
           </td>
           <td class="center aligned">
             {{#if isValid}}
-              <i class="green check icon"></i>
+            <i class="green check icon"></i>
             {{/if}}
             {{#if isAdmin}}
-              <i class="user secret icon"></i>
+            <i class="user secret icon"></i>
             {{/if}}
           </td>
           <td class="right aligned">
@@ -51,10 +51,12 @@
     <div class="ui basic modal" id="removeUserModal">
       <div class="ui icon header">
         <i class="red trash icon"></i>
-        Remove {{thisUsername}}
+        Remove {{ thisUsername }}
       </div>
       <div class="content center-this">
-        <p>Do you really want to remove <strong>{{thisUsername}}</strong> ?</p>
+        <p>
+          Do you really want to remove <strong>{{ thisUsername }}</strong> ?
+        </p>
       </div>
       <div class="actions">
         <div class="center-this">

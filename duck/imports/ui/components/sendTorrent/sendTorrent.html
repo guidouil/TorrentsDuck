@@ -1,20 +1,19 @@
 <template name="sendTorrent">
-
-  <form class="ui form" id="sendTorrentForm">
+  <form class="ui {{ isDark }} form" id="sendTorrentForm">
     <div class="two fields">
       <div class="field">
         <label>{{_ 'send_a_torrent_file'}}</label>
         <div class="ui left icon input" id="torrentFileClick">
-          <input type="text" placeholder="{{_ 'select_a_torrent_file'}}" id="torrentFileInput">
+          <input type="text" placeholder="{{_ 'select_a_torrent_file'}}" id="torrentFileInput" />
           <i class="file icon"></i>
         </div>
-        <input type="file" id="torrentFile" class="hidden">
+        <input type="file" id="torrentFile" class="hidden" />
       </div>
       <div class="field">
         <label>{{_ 'past_a_magnet_or_torrent_url'}}</label>
         <div class="ui right labeled left icon input" id="torrentUrlClick">
           <i class="linkify icon"></i>
-          <input type="text" placeholder="{{_ 'only_magnet_or_https'}}" id="torrentUrl">
+          <input type="text" placeholder="{{_ 'only_magnet_or_https'}}" id="torrentUrl" />
           <div class="ui label">
             GO
           </div>
@@ -22,5 +21,4 @@
       </div>
     </div>
   </form>
-
 </template>
