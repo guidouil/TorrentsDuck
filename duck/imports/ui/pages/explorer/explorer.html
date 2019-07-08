@@ -17,8 +17,8 @@
         </div>
       </div>
     </form>
-    <div class="ui horizontal divider"></div>
-    <div class="ui link celled relaxed selection list">
+    <div class="ui horizontal {{ isDark }} divider"></div>
+    <div class="ui link celled relaxed selection {{ isDark }} list">
       {{#unless isRootDirectory}}
       <a class="item goParentDirectory">
         <i class="chevron left icon"></i>
@@ -56,7 +56,7 @@
       {{/if}}
       {{/each}}
     </div>
-    <div class="ui horizontal divider"></div>
+    <div class="ui horizontal {{ isDark }} divider"></div>
   </div>
   {{> serverStatus}}
 </template>

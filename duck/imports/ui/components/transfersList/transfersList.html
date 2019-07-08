@@ -68,7 +68,7 @@
           {{humanFileSize size true}}
         </td>
         <td class="two wide center aligned">
-          <div class="ui yellow progress torrentProgress" id="progress{{ _id }}">
+          <div class="ui yellow {{ isDark }} progress torrentProgress" id="progress{{ _id }}">
             <div class="bar">
               <div class="progress"></div>
             </div>
@@ -76,7 +76,7 @@
           {{ initProgress }}
         </td>
         <td class="center aligned">
-          <div class="ui small labels">
+          <div class="ui small black {{ isDark }} labels">
             <div class="ui label">
               <i class="cloud download icon" title="Download"></i>
               {{humanFileSize downloadSpeed false}}/s
@@ -97,7 +97,7 @@
         </td>
         <td class="center aligned">
           {{#if timeRemaining}}
-          <div class="ui basic label">
+          <div class="ui black {{ isDark }} label">
             <i class="clock icon" title="Remaining time"></i>
             {{convertMs timeRemaining}}
           </div>
@@ -110,7 +110,7 @@
         <td class="right aligned">
           {{#if stopped}}
           <div
-            class="ui primary icon button startTorrent torrentAction"
+            class="ui primary icon button {{ isDark }} startTorrent torrentAction"
             data-content="{{_ 'start_transfer'}}"
             data-position="top right"
             id="startTorrent{{ _id }}"
@@ -119,7 +119,7 @@
           </div>
           {{else}}
           <div
-            class="ui orange icon button stopTorrent torrentAction"
+            class="ui orange icon button {{ isDark }} stopTorrent torrentAction"
             data-content="{{_ 'stop_transfer'}}"
             data-position="top right"
             id="stopTorrent{{ _id }}"
@@ -128,7 +128,7 @@
           </div>
           {{/if}}
           <div
-            class="ui red icon button removeTorrent torrentAction"
+            class="ui red icon button {{ isDark }} removeTorrent torrentAction"
             data-content="{{_ 'remove_transfer'}}"
             data-position="top right"
             id="removeTorrent{{ _id }}"
