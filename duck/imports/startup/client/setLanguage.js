@@ -3,8 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { T9n } from 'meteor/softwarerero:accounts-t9n';
-import { $ } from 'meteor/jquery';
 
+const localStoredLanguage = () => localStorage.getItem('lang');
 
 const userLanguage = () => {
   // If the user is logged in, retrieve their saved language
@@ -21,6 +21,9 @@ if (Meteor.isClient) {
       const urlLang = FlowRouter.getQueryParam('lang');
       if (urlLang) {
         lang = urlLang;
+      } else if (localStoredLanguage()) {
+        // Local storage is set if no url lang
+        lang = localStoredLanguage();
       } else if (userLanguage()) {
         // User language is set if no url lang and no local storage
         lang = userLanguage();
