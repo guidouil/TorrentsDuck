@@ -7,6 +7,10 @@ import { Conf } from '/imports/api/conf/conf';
 import './header.html';
 import '../logo/logo.js';
 
+Template.header.onRendered(function() {
+  $('.dropdown').dropdown();
+});
+
 Template.header.helpers({
   isFrench() {
     return TAPi18n.getLanguage() === 'fr';
@@ -31,5 +35,14 @@ Template.header.events({
     const conf = Conf.findOne({ _id: 'me' });
     const darkMode = (conf && conf.darkMode) || false;
     Conf.upsert({ _id: 'me' }, { $set: { darkMode: !darkMode } });
+  },
+  'click .setLang'(event) {
+    localStorage.setItem('lang', event.target.id);
+    if (Meteor.userId()) {
+      Meteor.users.update(
+        { _id: Meteor.userId() },
+        { $set: { 'profile.language': event.target.id } },
+      );
+    }
   },
 });
