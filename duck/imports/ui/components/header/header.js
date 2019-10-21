@@ -9,6 +9,10 @@ import '../logo/logo.js';
 
 Template.header.onRendered(function() {
   $('.dropdown').dropdown();
+  // enforce dark mode if detected from browser
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    Conf.upsert({ _id: 'me' }, { $set: { darkMode: true } });
+  }
 });
 
 Template.header.helpers({
