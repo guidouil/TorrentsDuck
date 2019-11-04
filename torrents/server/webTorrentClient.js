@@ -10,9 +10,11 @@ Meteor.startup(() => {
 
   // on startup all transfers should be mark as stopped
   async function transfersStopped() {
-    await Transfers.update({}, { $set:
-      { stopped: true, downloadSpeed: 0, uploadSpeed: 0 },
-    }, { multi: true });
+    Transfers.update(
+      {},
+      { $set: { stopped: true, downloadSpeed: 0, uploadSpeed: 0 } },
+      { multi: true },
+    );
   }
   webTorrentClient.on('ready', () => {
     transfersStopped();
@@ -56,6 +58,7 @@ Meteor.startup(() => {
       }
     });
     torrent.on('done', () => {
+      console.log('Done', torrent);
       updateTransfer(torrent);
     });
     torrent.on('error', (error) => {
@@ -65,4 +68,3 @@ Meteor.startup(() => {
 
   export default webTorrentClient;
 });
-
