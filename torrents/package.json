@@ -5,9 +5,9 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
+    "@babel/runtime": "^7.7.2",
     "meteor-node-stubs": "^0.4.1",
-    "webtorrent": "^0.103.1"
+    "webtorrent": "^0.107.17"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
