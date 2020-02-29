@@ -1,7 +1,7 @@
 {
   "torrentMaxConnections": 55,
-  "torrentsPath": "/data/torrents/",
-  "uploadsPath": "/data/uploads/",
+  "torrentsPath": "/Users/gui/data/torrents/",
+  "uploadsPath": "/Users/gui/data/uploads/",
   "serverIp": "127.0.0.1",
   "ftpPasvMin": "8000",
   "ftpPasvMax": "9000",

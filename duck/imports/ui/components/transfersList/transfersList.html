@@ -57,14 +57,14 @@
       {{#each tranfers}}
       <tr>
         <td>
-          {{truncate name 45}}
+          <span data-tooltip="{{username}}" data-inverted="" data-position="top left">{{truncate name 45}}</span>
         </td>
         <td>
           {{#if stopped}}
           <i class="red circle icon"></i>
           {{else}}
           <i class="green circle icon"></i>
-          {{/if}}
+          {{/if}} 
           {{humanFileSize size true}}
         </td>
         <td class="two wide center aligned">
@@ -102,9 +102,9 @@
             {{convertMs timeRemaining}}
           </div>
           {{else}}
-          {{#if equals progress 1}}
-          <i class="green check icon"></i>
-          {{/if}}
+            {{#if equals progress 1}}
+            <i class="green check icon"></i>
+            {{/if}}
           {{/if}}
         </td>
         <td class="right aligned">
@@ -146,5 +146,5 @@
       {{/each}}
     </tbody>
   </table>
-  {{> defaultBootstrapPaginator pagination=transfersPagination limit=50 containerClass="center aligned"}}
+  {{> defaultBootstrapPaginator pagination=transfersPagination limit=50 containerClass="center aligned" }}
 </template>

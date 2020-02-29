@@ -2,7 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-import { _ } from 'meteor/underscore';
+import sortBy from 'lodash/sortBy';
+import filter from 'lodash/filter';
 import { $ } from 'meteor/jquery';
 
 import './explorer.html';
@@ -15,20 +16,26 @@ Template.explorer.onCreated(() => {
   instance.filesListSource = new ReactiveVar();
   instance.currentPath = new ReactiveVar('/');
   instance.breadCrumbs = new ReactiveVar([]);
+  instance.sort = new ReactiveVar('date');
 });
 
 Template.explorer.onRendered(() => {
   const instance = Template.instance();
   $('.dropdown').dropdown();
   instance.autorun(() => {
+    const sort = instance.sort.get();
     const currentPath = instance.currentPath.get();
     Meteor.call('listFiles', currentPath, (error, filesList) => {
       if (error) {
         sAlert.error(error);
       }
       if (filesList) {
-        instance.filesList.set(filesList);
-        instance.filesListSource.set(filesList);
+        const sortedFilesList = sortBy(filesList, sort);
+        if (sort !== 'name') {
+          sortedFilesList.reverse();
+        }
+        instance.filesList.set(sortedFilesList);
+        instance.filesListSource.set(sortedFilesList);
       }
     });
   });
@@ -70,19 +77,15 @@ Template.explorer.events({
       templateInstance.filesList.set(filesListSource);
       return true;
     }
-    const filesList = _.filter(filesListSource, file =>
-      file.name.toLowerCase().includes(query.toLowerCase()));
+    const filesList = filter(filesListSource, (file) =>
+      file.name.toLowerCase().includes(query.toLowerCase()),
+    );
     templateInstance.filesList.set(filesList);
     return true;
   },
   'change #sort'(event, templateInstance) {
     if (event.target.value) {
-      const filesListSource = templateInstance.filesListSource.get();
-      const sortedFilesList = _.sortBy(filesListSource, event.target.value);
-      if (event.target.value !== 'name') {
-        sortedFilesList.reverse();
-      }
-      templateInstance.filesList.set(sortedFilesList);
+      templateInstance.sort.set(event.target.value);
     }
   },
 });

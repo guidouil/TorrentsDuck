@@ -1,13 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { _ } from 'meteor/underscore';
+import sample from 'lodash/sample';
 
 import './logo.html';
 
 Template.logo.onRendered(() => {
   const instance = Template.instance();
   Meteor.setTimeout(() => {
-    const effect = _.sample(['jiggle', 'tada', 'bounce', 'pulse', 'shake']);
+    const effect = sample(['jiggle', 'tada', 'bounce', 'pulse', 'shake']);
     instance.$('#logo').transition(effect);
   }, 500);
 });
@@ -26,7 +26,7 @@ Template.logo.helpers({
 
 Template.logo.events({
   'click #logo': (event, templateInstance) => {
-    const effect = _.sample(['jiggle', 'tada', 'bounce', 'pulse', 'shake']);
+    const effect = sample(['jiggle', 'tada', 'bounce', 'pulse', 'shake']);
     templateInstance.$('#logo').transition(effect);
     if (templateInstance.data.quack) {
       const quack = new Audio('/quack.mp3');
