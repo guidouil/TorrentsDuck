@@ -5,9 +5,9 @@ module.exports = {
       host: 'MY.SERVER.IP.ADDRESS', // somthing like 42.54.13.37
       username: 'MY_SERVER_SUDOER_USERNAME',
       // pem: './path/to/pem'
-      password: 'MY_SERVER_SUDOER_USERNAME_PASSWORD'
+      password: 'MY_SERVER_SUDOER_USERNAME_PASSWORD',
       // or neither for authenticate from ssh-agent
-    }
+    },
   },
 
   app: {
@@ -38,15 +38,13 @@ module.exports = {
     },
 
     docker: {
-      image: 'abernix/meteord:node-8-base',
-      args: [
-        '--link=mongodb:mongodb'
-      ]
+      image: 'abernix/meteord:node-12-base',
+      args: ['--link=mongodb:mongodb'],
     },
 
     // Show progress bar while uploading bundle to server
     // You might need to disable it on CI servers
-    enableUploadProgressBar: true
+    enableUploadProgressBar: true,
   },
 
   // (Optional)
@@ -59,7 +57,7 @@ module.exports = {
     ssl: {
       // Enable Let's Encrypt
       letsEncryptEmail: 'MY_DOMAIN@gmail.com',
-      forceSSL: true
-    }
-  }
+      forceSSL: true,
+    },
+  },
 };
