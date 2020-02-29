@@ -19,6 +19,16 @@ Template.registerHelper('shortDate', (d) => {
   return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
 });
 
+Template.registerHelper('shortDateTime', (d) => {
+  if (!d) {
+    return '';
+  }
+  const pad = (s) => (s < 10 ? `0${s}` : s);
+  return `${[pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join(
+    '/',
+  )} ${d.getHours()}:${d.getMinutes()}`;
+});
+
 Template.registerHelper('humanFileSize', (bytes, si) => {
   if (bytes !== 0 && !bytes) {
     return false;

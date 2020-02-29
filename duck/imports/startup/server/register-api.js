@@ -16,5 +16,5 @@ import '../../api/torrents/methods.js';
 // import '../../api/transfers/methods.js';
 import '../../api/transfers/server/publications.js';
 
-// import '../../api/links/methods.js';
-// import '../../api/links/server/publications.js';
+import '../../api/tchats/methods.js';
+import '../../api/tchats/server/publications.js';

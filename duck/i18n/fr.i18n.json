@@ -37,5 +37,7 @@
   "stop_message": "Le transfert va s'arrêter dans 10 sec ou moins ⏳",
   "remove_message": "Le transfert va être supprimé dans 10 sec ou moins ⏳",
   "wrong_url_message": "L'URL doit commencer par http://, https:// ou magnet: 😱",
-  "thanks": "Merci 😘"
+  "thanks": "Merci 😘",
+  "tchat": "Discution",
+  "message": "Votre message"
 }

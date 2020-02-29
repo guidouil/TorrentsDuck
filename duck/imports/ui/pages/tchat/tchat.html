@@ -1,0 +1,26 @@
+<template name="tchat">
+  <div id="tchat">
+    <div class="ui {{isDark}} basic segment">
+      <div class="ui {{isDark}} relaxed divided large list">
+        {{#each tchats}}
+        <div class="item">
+          <div class="content">
+            <div class="description">{{by}} <small>{{shortDateTime when}}</small></div>
+            <div class="header">
+              {{message}}
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="ui {{isDark}} bottom fixed one item menu">
+    <div class="item">
+      <div class="ui {{isDark}} icon input">
+        <input type="text" name="messageInput" id="messageInput" placeholder="{{_ 'message'}}" />
+        <i class="send icon" id="sendMessage"></i>
+      </div>
+    </div>
+  </div>
+</template>

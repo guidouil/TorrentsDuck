@@ -3,44 +3,61 @@
 	min-height: 100vh;
 	flex-direction: column;
 }
+
 .mainContainer {
 	flex: 1;
 	padding-top: 5rem;
 	padding-bottom: 3rem;
 }
+
 .center-this {
 	text-align: center;
 }
+
 .hidden {
 	display: none;
 }
+
 .torrentProgress {
 	margin-bottom: 0 !important;
 }
+
 .middleCheckbox {
 	margin-top: 7px;
 }
+
+#tchat {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: flex-end;
+}
+
 //medium+ screen sizes
 @media (min-width: 992px) {
 	.desktop-only {
 		display: block !important;
 	}
 }
+
 //small screen sizes
 @media (max-width: 991px) {
 	.mobile-only {
 		display: block !important;
 	}
-	  .desktop-only {
+
+	.desktop-only {
 		display: none !important;
 	}
 }
+
 // Dark mode
 .ui.card.inverted,
 .ui.styled.accordion.inverted,
 .Site.inverted {
 	background-color: #1b1c1d !important;
 }
+
 .inverted input,
 .inverted .dropdown,
 .ui.icon.input.inverted {

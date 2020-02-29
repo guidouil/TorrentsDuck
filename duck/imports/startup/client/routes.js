@@ -6,6 +6,7 @@ import { AccountsTemplates } from 'meteor/useraccounts:core';
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/explorer/explorer.js';
+import '../../ui/pages/tchat/tchat.js';
 import '../../ui/pages/usersList/usersList.js';
 import '../../ui/pages/not-found/not-found.js';
 import '../../ui/components/customAtForm/customAtForm.js';
@@ -23,6 +24,14 @@ FlowRouter.route('/explorer', {
   name: 'explorer',
   action() {
     BlazeLayout.render('appBody', { main: 'explorer' });
+  },
+});
+
+FlowRouter.route('/tchat', {
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  name: 'tchat',
+  action() {
+    BlazeLayout.render('appBody', { main: 'tchat' });
   },
 });
 
