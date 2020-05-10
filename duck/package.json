@@ -2,7 +2,7 @@
   "name": "torrentsduck",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "meteor run --settings ./private/settings-dev.json",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "lint": "eslint .",
     "pretest": "npm run lint --silent"

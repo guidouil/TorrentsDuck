@@ -4,8 +4,12 @@
       <div class="fields">
         <div class="fourteen wide field">
           <div class="ui fluid icon input" id="searchFile">
-            <input type="text" placeholder="{{_ 'search'}}" />
+            <input type="text" placeholder="{{_ 'search'}}" value="{{search}}" />
+            {{#unless search}}
             <i class="{{ isDark }} search icon"></i>
+            {{else}}
+            <i class="link {{ isDark }} close icon" id="clearSearch"></i>
+            {{/unless}}
           </div>
         </div>
         <div class="two wide field">
@@ -26,9 +30,7 @@
           {{_'parent_directory'}}
         </div>
       </a>
-      {{/unless}}
-      {{#each filesList}}
-      {{#if isDirectory}}
+      {{/unless}} {{#each filesList}} {{#if isDirectory}}
       <a class="item changePath">
         <i class="yellow folder icon"></i>
         <div class="content">
@@ -40,8 +42,7 @@
           <em>{{shortDate date}}</em>
         </div>
       </a>
-      {{/if}}
-      {{#if isFile}}
+      {{/if}} {{#if isFile}}
       <a class="item" href="{{makeLink currentPath name}}" target="_blank">
         <i class="blue file outline icon"></i>
         <div class="content">
@@ -53,8 +54,7 @@
           <em>{{shortDate date}} — {{humanFileSize size}}</em>
         </div>
       </a>
-      {{/if}}
-      {{/each}}
+      {{/if}} {{/each}}
     </div>
     <div class="ui horizontal {{ isDark }} divider"></div>
   </div>

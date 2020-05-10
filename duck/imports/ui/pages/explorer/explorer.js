@@ -13,10 +13,10 @@ import '../../components/serverStatus/serverStatus.js';
 Template.explorer.onCreated(() => {
   const instance = Template.instance();
   instance.filesList = new ReactiveVar();
-  instance.filesListSource = new ReactiveVar();
   instance.currentPath = new ReactiveVar('/');
   instance.breadCrumbs = new ReactiveVar([]);
   instance.sort = new ReactiveVar('date');
+  instance.search = new ReactiveVar();
 });
 
 Template.explorer.onRendered(() => {
@@ -25,17 +25,22 @@ Template.explorer.onRendered(() => {
   instance.autorun(() => {
     const sort = instance.sort.get();
     const currentPath = instance.currentPath.get();
+    const search = instance.search.get();
     Meteor.call('listFiles', currentPath, (error, filesList) => {
       if (error) {
         sAlert.error(error);
       }
       if (filesList) {
-        const sortedFilesList = sortBy(filesList, sort);
+        let sortedFilesList = sortBy(filesList, sort);
         if (sort !== 'name') {
           sortedFilesList.reverse();
         }
+        if (search) {
+          sortedFilesList = filter(sortedFilesList, (file) =>
+            file.name.toLowerCase().includes(search.toLowerCase()),
+          );
+        }
         instance.filesList.set(sortedFilesList);
-        instance.filesListSource.set(sortedFilesList);
       }
     });
   });
@@ -51,6 +56,9 @@ Template.explorer.helpers({
   },
   currentPath() {
     return Template.instance().currentPath.get();
+  },
+  search() {
+    return Template.instance().search.get();
   },
 });
 
@@ -72,20 +80,18 @@ Template.explorer.events({
   },
   'input #searchFile'(event, templateInstance) {
     const query = event.target.value;
-    const filesListSource = templateInstance.filesListSource.get();
     if (!query) {
-      templateInstance.filesList.set(filesListSource);
-      return true;
+      templateInstance.search.set('');
+    } else {
+      templateInstance.search.set(query);
     }
-    const filesList = filter(filesListSource, (file) =>
-      file.name.toLowerCase().includes(query.toLowerCase()),
-    );
-    templateInstance.filesList.set(filesList);
-    return true;
   },
   'change #sort'(event, templateInstance) {
     if (event.target.value) {
       templateInstance.sort.set(event.target.value);
     }
+  },
+  'click #clearSearch'(event, templateInstance) {
+    templateInstance.search.set('');
   },
 });
